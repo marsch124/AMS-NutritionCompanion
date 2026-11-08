@@ -1,6 +1,6 @@
 # How it works
 
-**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub Actions run 42510781808 passed the iOS build, eight isolated store/persistence tests, one smoke test, and four Mac UI tests. iPhone/iPad runtime review, full screenshot review, and household sync are still outstanding.
+**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub Actions run 42510781808 passed the iOS build, eight isolated store/persistence tests, one smoke test, and five Mac UI tests. iPhone/iPad runtime review, full screenshot review, and household sync are still outstanding.
 
 ## Product catalog and shopping list
 
@@ -30,6 +30,6 @@ Open the static English label guide to see Swedish and German terms for energy, 
 
 ## Verification and remaining work
 
-GitHub Actions passed the iOS target build, eight isolated store/persistence tests plus one smoke test, and four Mac UI tests on 8 November 2026 (run 42510781808). The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, opening the Label guide as an in-app destination, and native Mac row selection. Each UI test starts with a unique data suite. A local test build could not start because this machine's sandbox blocks Xcode's SwiftUI macro service; CI provided the verification. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
+GitHub Actions passed the iOS target build, eight isolated store/persistence tests plus one smoke test, and five Mac UI tests on 8 November 2026 (run 42511878437). The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, opening the Label guide as an in-app destination, native Mac row selection, and resetting an unavailable store filter when changing markets. Each UI test starts with a unique data suite. A local test build could not start because this machine's sandbox blocks Xcode's SwiftUI macro service; CI provided the verification. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
 
 The public repository is https://github.com/marsch124/AMS-NutritionCompanion. Use synthetic data during development. Personal Reminders and vault data are not used by this app.
