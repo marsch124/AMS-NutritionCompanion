@@ -20,6 +20,18 @@ final class ShoppingScreenUITests: XCTestCase {
         XCTAssertFalse(app.buttons["guide.done"].exists)
     }
 
+    func testMacProductRowUsesPersistentNativeSelection() {
+        let app = launchApp()
+        let library = app.descendants(matching: .any)["sidebar.productLibrary"]
+        XCTAssertTrue(library.waitForExistence(timeout: 10))
+        library.click()
+
+        let row = app.descendants(matching: .any)["library.row.green-lentils"]
+        XCTAssertTrue(row.waitForExistence(timeout: 10))
+        row.click()
+        XCTAssertTrue(row.isSelected)
+    }
+
     func testShoppingScreenExposesStableListAddAndStoreFilterIdentifiers() {
         let app = launchApp()
 
