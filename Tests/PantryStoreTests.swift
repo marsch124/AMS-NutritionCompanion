@@ -165,6 +165,21 @@ final class PantryStoreTests: XCTestCase {
         XCTAssertFalse(try XCTUnwrap(store.shoppingListEntries.first).isChecked)
     }
 
+    func testFailedEncodingShowsWarningAndBlocksFurtherChanges() {
+        let suiteName = "ams.pantry.tests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let product = sampleProduct(approved: false)
+        let store = PantryStore(defaults: defaults, seedProducts: [product])
+        var invalid = product
+        invalid.maximumPrice = .infinity
+
+        store.update(invalid)
+
+        XCTAssertTrue(store.isReadOnly)
+        XCTAssertNotNil(store.persistenceWarning)
+    }
+
     private func sampleProduct(approved: Bool = true, martinApproved: Bool = false, annaApproved: Bool = false) -> PantryProduct {
         PantryProduct(
             id: "test-product",
