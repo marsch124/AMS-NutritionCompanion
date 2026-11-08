@@ -8,7 +8,9 @@
 - Migrated existing local product-array data into the new state format, preserving list quantities and bought status. The original saved data remains in place, and stable migrated identifiers prevent duplicate list entries if migration is retried.
 - If saved data cannot be read, show a warning and leave it untouched rather than replacing it with the starter catalog.
 - Added isolated tests for approval enforcement, list lifecycle, legacy migration, and preserving unreadable saved data. Tests use their own temporary UserDefaults suite.
-- GitHub Actions now passes the iOS build, three data/persistence tests, and two Mac UI tests.
+- Changed the Mac/iPad sidebar to a native selectable list with a visible current section. The Label guide is now a normal in-app destination; iPhone navigation uses a Browse menu.
+- Moved Mac search into the toolbar and removed the duplicate market/store selector from the list pane.
+- GitHub Actions now passes the iOS build, three data/persistence tests, and three Mac UI tests.
 
 ## Existing prototype — Version 0.1.0
 

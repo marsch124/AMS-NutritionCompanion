@@ -18,7 +18,7 @@ If saved data cannot be read, the app shows a warning and does not replace it wi
 
 ## Browse and shop
 
-Browse Product library and search by food name or category. The shopping list starts empty unless existing saved data is migrated. Choose Sweden/SEK or Germany/EUR and optionally ICA, Coop, Willys, Lidl, or Other. Proposed seed products have no store assignments, so filtering to one retailer can hide them until a store is added.
+Browse Shopping, Product library, and Label guide from the selectable sidebar on Mac and iPad. On iPhone, use the Browse menu. The Label guide is an in-app destination. Search and the single market/store selector are in the Mac toolbar; iPhone search stays above the list. The shopping list starts empty unless existing saved data is migrated. Choose Sweden/SEK or Germany/EUR and optionally ICA, Coop, Willys, Lidl, or Other. Proposed seed products have no store assignments, so filtering to one retailer can hide them until a store is added.
 
 Product details show category, approval state, selection guidance, ingredient/processing criteria, store, and numeric price limits if present. The editor accepts an exact brand/product, package size/unit, category, selection tips, ingredient/processing notes, one store, a minimum/maximum price, and a package photo selected from the photo library. Direct camera capture, branch detail, price observations/history, and separate per-market/store ranges are not implemented.
 
@@ -30,6 +30,6 @@ Open the static English label guide to see Swedish and German terms for energy, 
 
 ## Verification and remaining work
 
-GitHub Actions passed the iOS target build, three isolated data/persistence tests, and two Mac UI tests on 8 November 2026. The UI tests exercise stable accessibility identifiers, joint approval, and adding an approved product to the list. The Mac app has been built and launched locally. iOS/iPad simulator and device behavior, full day/night screenshots, reviewer sign-off, iCloud sync, and release have not been verified.
+GitHub Actions passed the iOS target build, three isolated data/persistence tests, and three Mac UI tests on 8 November 2026. The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, and opening the Label guide as an in-app destination. The Mac app has been built and launched locally. iOS/iPad simulator and device behavior, full day/night screenshots, reviewer sign-off, iCloud sync, and release have not been verified.
 
 The public repository is https://github.com/marsch124/AMS-NutritionCompanion. Use synthetic data during development. Personal Reminders and vault data are not used by this app.

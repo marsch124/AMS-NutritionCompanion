@@ -26,7 +26,7 @@ final class ShoppingScreenUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        let library = app.buttons["Product library"]
+        let library = app.descendants(matching: .any)["sidebar.productLibrary"]
         XCTAssertTrue(library.waitForExistence(timeout: 10))
         library.click()
         XCTAssertTrue(app.descendants(matching: .any)["library.list"].waitForExistence(timeout: 10))
@@ -43,7 +43,7 @@ final class ShoppingScreenUITests: XCTestCase {
         app.buttons["product.approve.anna"].click()
         XCTAssertTrue(app.buttons["product.addToList"].waitForExistence(timeout: 5))
         app.buttons["product.addToList"].click()
-        app.buttons["Shopping"].click()
+        app.descendants(matching: .any)["sidebar.shopping"].click()
         XCTAssertTrue(app.staticTexts["Green lentils, dried"].waitForExistence(timeout: 5))
     }
 }

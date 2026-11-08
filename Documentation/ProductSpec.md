@@ -17,6 +17,7 @@ Help Martin shop accurately for the household with Anna. The intended app should
 ## Present in the prototype source
 
 - SwiftUI app targets are declared for iOS and macOS. macOS uses a three-column NavigationSplitView; iPhone uses a NavigationStack; regular-width iPad source uses a three-column NavigationSplitView.
+- Mac and iPad use a selectable sidebar for Shopping, Product library, and Label guide. The label guide is an in-app destination; iPhone navigation uses a Browse menu. Mac search and the single market/store selector are in the toolbar.
 - A categorized product library and shopping list, search, market/store filters, and a shopping-list check-off control are defined. Shopping-list entries are separate from catalog products and store their own product reference, quantity, and bought state.
 - Adding, checking off, or removing a shopping-list entry does not modify the catalog product. Both local household approval flags are required by the data store before an item can be added, including through the iPhone swipe action.
 - Product detail presents selection tips, ingredient/processing criteria, store and price text, and separate local approval flags for Martin and Anna. A candidate is marked approved only after both flags are set; this does not authenticate who tapped either control.
@@ -26,7 +27,7 @@ Help Martin shop accurately for the household with Anna. The intended app should
 - Product data, shopping-list entries, and selected package-photo bytes are saved together as one versioned state value in UserDefaults. On launch, legacy product-array data is migrated while preserving list quantity and bought status; stable migrated entry IDs avoid duplicate entries on retries, and the old saved value remains in place.
 - Unreadable saved data is left untouched and a warning is shown instead of silently loading seed data over it. Persistence tests use a separate temporary UserDefaults suite.
 
-The points above describe source code and local Mac observation plus the passing GitHub CI run on 8 November 2026. iOS/iPad simulator/device runtime behavior, full screen review, day/night screenshot set, and accessibility sign-off remain unconfirmed.
+The points above describe source code and local Mac observation plus the passing GitHub CI run on 8 November 2026. That CI run includes three data/persistence tests and three Mac UI tests. iOS/iPad simulator/device runtime behavior, full screen review, day/night screenshot set, and accessibility sign-off remain unconfirmed.
 
 ## Current prototype limits
 

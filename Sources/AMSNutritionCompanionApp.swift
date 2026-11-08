@@ -265,7 +265,6 @@ struct PantryRootView: View {
     @State private var selection: String?
     @State private var selectedSection = "Shopping"
     @State private var showingAdd = false
-    @State private var showingGuide = false
     @FocusState private var searchFocused: Bool
 
     private var selectedProduct: PantryProduct? { selection.flatMap(store.product) }
@@ -281,7 +280,6 @@ struct PantryRootView: View {
         .navigationSplitViewStyle(.balanced)
         .toolbar { toolbarItems }
         .sheet(isPresented: $showingAdd) { ProductEditorSheet(product: nil).environmentObject(store).frame(minWidth: 480, minHeight: 520) }
-        .sheet(isPresented: $showingGuide) { LabelGuideView().frame(minWidth: 550, minHeight: 500) }
         .onReceive(NotificationCenter.default.publisher(for: .addPantryItem)) { _ in showingAdd = true }
         .onReceive(NotificationCenter.default.publisher(for: .focusPantrySearch)) { _ in searchFocused = true }
         #else
@@ -295,7 +293,6 @@ struct PantryRootView: View {
             }
             .toolbar { toolbarItems }
             .sheet(isPresented: $showingAdd) { ProductEditorSheet(product: nil).environmentObject(store) }
-            .sheet(isPresented: $showingGuide) { NavigationStack { LabelGuideView().toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { showingGuide = false } } } } }
             .onReceive(NotificationCenter.default.publisher(for: .addPantryItem)) { _ in showingAdd = true }
             .onReceive(NotificationCenter.default.publisher(for: .focusPantrySearch)) { _ in searchFocused = true }
         } else {
@@ -306,7 +303,6 @@ struct PantryRootView: View {
                 .navigationDestination(for: String.self) { id in ProductDetailView(productID: id) }
         }
         .sheet(isPresented: $showingAdd) { ProductEditorSheet(product: nil).environmentObject(store) }
-        .sheet(isPresented: $showingGuide) { NavigationStack { LabelGuideView().toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { showingGuide = false } } } } }
         .onReceive(NotificationCenter.default.publisher(for: .addPantryItem)) { _ in showingAdd = true }
         .onReceive(NotificationCenter.default.publisher(for: .focusPantrySearch)) { _ in searchFocused = true }
         }
@@ -316,7 +312,22 @@ struct PantryRootView: View {
     @ToolbarContentBuilder private var toolbarItems: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) { Button("Add item") { showingAdd = true }.accessibilityIdentifier("shopping.addItem") }
         #if os(iOS)
-        ToolbarItem(placement: .automatic) { Button(selectedSection == "Shopping" ? "Product library" : "Shopping") { selectedSection = selectedSection == "Shopping" ? "Product library" : "Shopping" } }
+        ToolbarItem(placement: .automatic) {
+            Menu("Browse") {
+                Button("Shopping") { selectSection("Shopping") }
+                Button("Product library") { selectSection("Product library") }
+                Button("Label guide") { selectSection("Label guide") }
+            }.accessibilityIdentifier("navigation.browse")
+        }
+        if sizeClass == .regular {
+            ToolbarItem(placement: .automatic) {
+                TextField("Search foods", text: $store.search).focused($searchFocused).frame(width: 220).accessibilityIdentifier("shopping.search")
+            }
+        }
+        #else
+        ToolbarItem(placement: .automatic) {
+            TextField("Search foods", text: $store.search).focused($searchFocused).frame(width: 220).accessibilityIdentifier("shopping.search")
+        }
         #endif
         ToolbarItem(placement: .automatic) {
             Menu {
@@ -324,27 +335,34 @@ struct PantryRootView: View {
                 Picker("Store", selection: $store.selectedStore) { ForEach(retailerOptions, id: \.self) { Text($0) } }
             } label: { Text("Market and store") }.accessibilityIdentifier("shopping.storeFilter")
         }
-        ToolbarItem(placement: .automatic) { Button("Label guide") { showingGuide = true } }
+        #if os(macOS)
+        ToolbarItem(placement: .automatic) { Button("Label guide") { selectSection("Label guide") }.accessibilityIdentifier("navigation.labelGuide") }
+        #endif
     }
 
     private var sidebar: some View {
-        List {
-            Button("Shopping") { selectedSection = "Shopping"; selection = nil }.buttonStyle(.plain)
-            Button("Product library") { selectedSection = "Product library"; selection = nil }.buttonStyle(.plain)
-            Button("Label guide") { showingGuide = true }.buttonStyle(.plain)
+        List(selection: Binding<String?>(
+            get: { selectedSection },
+            set: { if let section = $0 { selectSection(section) } }
+        )) {
+            Text("Shopping").tag("Shopping").accessibilityIdentifier("sidebar.shopping")
+            Text("Product library").tag("Product library").accessibilityIdentifier("sidebar.productLibrary")
+            Text("Label guide").tag("Label guide").accessibilityIdentifier("sidebar.labelGuide")
             Section("Market") { Text(store.selectedMarket).font(.subheadline).foregroundStyle(.secondary) }
         }
         .listStyle(.sidebar)
         .navigationTitle("Pantry")
+        .onChange(of: selectedSection) { _, _ in selection = nil }
         .safeAreaInset(edge: .bottom) { VStack(alignment: .leading, spacing: 2) { Text("Martin + Anna"); Text("Version 0.1.0") }.font(.caption).foregroundStyle(.secondary).padding() }
     }
 
     private var shoppingList: some View {
         VStack(spacing: 0) {
+            #if os(iOS)
             HStack {
                 TextField("Search foods", text: $store.search).textFieldStyle(.roundedBorder).focused($searchFocused).accessibilityIdentifier("shopping.search")
-                if !isPhone { marketPicker }
             }.padding(.horizontal).padding(.vertical, 10)
+            #endif
             if let warning = store.persistenceWarning {
                 Text(warning).font(.callout).foregroundStyle(.red).frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
             }
@@ -390,23 +408,15 @@ struct PantryRootView: View {
     }
     @ViewBuilder private var sectionContent: some View {
         if selectedSection == "Product library" { libraryList }
+        else if selectedSection == "Label guide" { LabelGuideView().accessibilityIdentifier("labelGuide.screen") }
         else { shoppingList }
     }
 
-    private var isPhone: Bool {
-        #if os(iOS)
-        sizeClass == .compact
-        #else
-        false
-        #endif
+    private func selectSection(_ section: String) {
+        selectedSection = section
+        selection = nil
     }
-    private var marketPicker: some View {
-        Menu {
-            Picker("Market", selection: $store.selectedMarket) { ForEach(["Sweden · SEK", "Germany · EUR"], id: \.self) { Text($0) } }
-            Picker("Store", selection: $store.selectedStore) { ForEach(retailerOptions, id: \.self) { Text($0) } }
-        } label: { Text(store.selectedStore == "All stores" ? store.selectedMarket : "\(store.selectedStore) · \(store.selectedMarket.components(separatedBy: " · ").last ?? "SEK")") }
-            .accessibilityIdentifier("shopping.storeFilter")
-    }
+
     private var retailerOptions: [String] {
         store.selectedMarket.hasPrefix("Sweden") ? ["All stores", "ICA", "Coop", "Willys", "Lidl", "Other"] : ["All stores", "Aldi", "Edeka", "REWE", "Lidl", "Other"]
     }
