@@ -190,6 +190,13 @@ final class PantryStore: ObservableObject {
     }
     var shoppingCategories: [String] { Array(Set(visibleShoppingItems.map(\.product.category))).sorted() }
     func product(_ id: String) -> PantryProduct? { products.first { $0.id == id } }
+    func selectMarket(_ market: String) {
+        selectedMarket = market
+        let availableStores = market.hasPrefix("Sweden")
+            ? ["All stores", "ICA", "Coop", "Willys", "Lidl", "Other"]
+            : ["All stores", "Aldi", "Edeka", "REWE", "Lidl", "Other"]
+        if !availableStores.contains(selectedStore) { selectedStore = "All stores" }
+    }
     @discardableResult
     func update(_ value: PantryProduct) -> Bool {
         guard canPersist, let i = products.firstIndex(where: { $0.id == value.id }) else { return false }
@@ -379,7 +386,10 @@ struct PantryRootView: View {
         if selectedSection != "Label guide" {
         ToolbarItem(placement: .automatic) {
             Menu {
-                Picker("Market", selection: $store.selectedMarket) { ForEach(["Sweden · SEK", "Germany · EUR"], id: \.self) { Text($0) } }
+                Picker("Market", selection: Binding(
+                    get: { store.selectedMarket },
+                    set: { store.selectMarket($0) }
+                )) { ForEach(["Sweden · SEK", "Germany · EUR"], id: \.self) { Text($0) } }
                 Picker("Store", selection: $store.selectedStore) { ForEach(retailerOptions, id: \.self) { Text($0) } }
             } label: { Text("\(store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR") · \(store.selectedStore)") }
                 .accessibilityLabel("\(store.selectedMarket), \(store.selectedStore)")
