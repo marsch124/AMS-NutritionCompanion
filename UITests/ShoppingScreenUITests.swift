@@ -30,7 +30,7 @@ final class ShoppingScreenUITests: XCTestCase {
         XCTAssertTrue(rowName.waitForExistence(timeout: 10))
         let row = app.outlineRows.containing(.staticText, identifier: rowName.identifier).firstMatch
         XCTAssertTrue(row.exists)
-        row.click()
+        rowName.click()
         XCTAssertTrue(row.isSelected)
     }
 
