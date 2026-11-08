@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49E724C4D75D70F91AB30656 /* ShoppingScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E148C830B4ADDA9CC6C6DE /* ShoppingScreenUITests.swift */; };
+		585CEC77C1F8A03AC012E612 /* SeedProducts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EB608ED91C6C5CBDA268A /* SeedProducts.json */; };
+		5CD3C210373D7AF78F9A711C /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A041EEF2C857A06BE169008 /* SmokeTests.swift */; };
+		6C5519D68CC42319B32E22D5 /* SeedProducts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EB608ED91C6C5CBDA268A /* SeedProducts.json */; };
+		7E8940EF1A1060BC1516A398 /* AMSNutritionCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0B6A57B8C37B8596F9000 /* AMSNutritionCompanionApp.swift */; };
+		A199E55C51F8F80838CDB824 /* AMSNutritionCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0B6A57B8C37B8596F9000 /* AMSNutritionCompanionApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF572D02B283F060132CB617 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EFECFCE5F5FD99C5326D344 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F538895E482630654CE09E8;
+			remoteInfo = AMSNutritionCompanionMac;
+		};
+		E27D23FF57472B79E8CBF660 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EFECFCE5F5FD99C5326D344 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F538895E482630654CE09E8;
+			remoteInfo = AMSNutritionCompanionMac;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1F51868ABE17E6699AB123C8 /* AMSNutritionCompanionMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AMSNutritionCompanionMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F8EB608ED91C6C5CBDA268A /* SeedProducts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SeedProducts.json; sourceTree = "<group>"; };
+		64C0B6A57B8C37B8596F9000 /* AMSNutritionCompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSNutritionCompanionApp.swift; sourceTree = "<group>"; };
+		64E148C830B4ADDA9CC6C6DE /* ShoppingScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingScreenUITests.swift; sourceTree = "<group>"; };
+		7442A040A44AEBC57BBEB161 /* AMSNutritionCompanionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMSNutritionCompanionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C03C5F5299A0C225C0F45EE /* AMSNutritionCompanion.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AMSNutritionCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87B843F353FE056B22B86BB8 /* AMSNutritionCompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMSNutritionCompanionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A041EEF2C857A06BE169008 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		488592A61BC07F6BAC7F446B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8A041EEF2C857A06BE169008 /* SmokeTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4C18791CB45A277DA97B3BFA = {
+			isa = PBXGroup;
+			children = (
+				73ABF9A67869D9B99951803C /* Resources */,
+				F48DB1E79D80B9E0CE67AEF8 /* Sources */,
+				488592A61BC07F6BAC7F446B /* Tests */,
+				BC609055B8CAB1F7E7620E8B /* UITests */,
+				6BC5ECB38834F3F298A07103 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6BC5ECB38834F3F298A07103 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7C03C5F5299A0C225C0F45EE /* AMSNutritionCompanion.app */,
+				1F51868ABE17E6699AB123C8 /* AMSNutritionCompanionMac.app */,
+				87B843F353FE056B22B86BB8 /* AMSNutritionCompanionTests.xctest */,
+				7442A040A44AEBC57BBEB161 /* AMSNutritionCompanionUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73ABF9A67869D9B99951803C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1F8EB608ED91C6C5CBDA268A /* SeedProducts.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BC609055B8CAB1F7E7620E8B /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				64E148C830B4ADDA9CC6C6DE /* ShoppingScreenUITests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		F48DB1E79D80B9E0CE67AEF8 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				64C0B6A57B8C37B8596F9000 /* AMSNutritionCompanionApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5F538895E482630654CE09E8 /* AMSNutritionCompanionMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F630ED2D41E6DFF945B118D2 /* Build configuration list for PBXNativeTarget "AMSNutritionCompanionMac" */;
+			buildPhases = (
+				FA8B6E02E5A4934511BB9809 /* Sources */,
+				A79771B903C5EF9B14084A99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMSNutritionCompanionMac;
+			packageProductDependencies = (
+			);
+			productName = AMSNutritionCompanionMac;
+			productReference = 1F51868ABE17E6699AB123C8 /* AMSNutritionCompanionMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E81E1C2F882F86A4712FD81 /* AMSNutritionCompanionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0914AD8A7FFD1F961F539B09 /* Build configuration list for PBXNativeTarget "AMSNutritionCompanionTests" */;
+			buildPhases = (
+				C33B943EAE71D7B463F639D8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC15C306EF0D9C029E5FBB8F /* PBXTargetDependency */,
+			);
+			name = AMSNutritionCompanionTests;
+			packageProductDependencies = (
+			);
+			productName = AMSNutritionCompanionTests;
+			productReference = 87B843F353FE056B22B86BB8 /* AMSNutritionCompanionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C7CB49110E0921BFF1B4E5D6 /* AMSNutritionCompanion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70007BB2199A503BEF93F77A /* Build configuration list for PBXNativeTarget "AMSNutritionCompanion" */;
+			buildPhases = (
+				1B4D9AC95057E3A8447D3D6E /* Sources */,
+				19F006D7DDDD252202532111 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMSNutritionCompanion;
+			packageProductDependencies = (
+			);
+			productName = AMSNutritionCompanion;
+			productReference = 7C03C5F5299A0C225C0F45EE /* AMSNutritionCompanion.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F5170BA3E8E022A2E56DB00F /* AMSNutritionCompanionUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3357CD2A8006A9B7C5E12BDB /* Build configuration list for PBXNativeTarget "AMSNutritionCompanionUITests" */;
+			buildPhases = (
+				201DBC0596D1933C18FD663D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5EDA32F1460D4A1C6DA9776 /* PBXTargetDependency */,
+			);
+			name = AMSNutritionCompanionUITests;
+			packageProductDependencies = (
+			);
+			productName = AMSNutritionCompanionUITests;
+			productReference = 7442A040A44AEBC57BBEB161 /* AMSNutritionCompanionUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5EFECFCE5F5FD99C5326D344 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					5F538895E482630654CE09E8 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					6E81E1C2F882F86A4712FD81 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					C7CB49110E0921BFF1B4E5D6 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F5170BA3E8E022A2E56DB00F = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5F538895E482630654CE09E8;
+					};
+				};
+			};
+			buildConfigurationList = 6B765F4477C7209817FF6BC6 /* Build configuration list for PBXProject "AMSNutritionCompanion" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 4C18791CB45A277DA97B3BFA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6BC5ECB38834F3F298A07103 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7CB49110E0921BFF1B4E5D6 /* AMSNutritionCompanion */,
+				5F538895E482630654CE09E8 /* AMSNutritionCompanionMac */,
+				6E81E1C2F882F86A4712FD81 /* AMSNutritionCompanionTests */,
+				F5170BA3E8E022A2E56DB00F /* AMSNutritionCompanionUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		19F006D7DDDD252202532111 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				585CEC77C1F8A03AC012E612 /* SeedProducts.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A79771B903C5EF9B14084A99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C5519D68CC42319B32E22D5 /* SeedProducts.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1B4D9AC95057E3A8447D3D6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E8940EF1A1060BC1516A398 /* AMSNutritionCompanionApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		201DBC0596D1933C18FD663D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E724C4D75D70F91AB30656 /* ShoppingScreenUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C33B943EAE71D7B463F639D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CD3C210373D7AF78F9A711C /* SmokeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA8B6E02E5A4934511BB9809 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A199E55C51F8F80838CDB824 /* AMSNutritionCompanionApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5EDA32F1460D4A1C6DA9776 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5F538895E482630654CE09E8 /* AMSNutritionCompanionMac */;
+			targetProxy = E27D23FF57472B79E8CBF660 /* PBXContainerItemProxy */;
+		};
+		DC15C306EF0D9C029E5FBB8F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5F538895E482630654CE09E8 /* AMSNutritionCompanionMac */;
+			targetProxy = AF572D02B283F060132CB617 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		04FEC6AAAA00B5E8A6603B04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = AMSNutritionCompanionMac;
+			};
+			name = Debug;
+		};
+		0E0B8DC8E52EDD5C1401C479 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AMSNutritionCompanionMac.app/Contents/MacOS/AMSNutritionCompanionMac";
+			};
+			name = Release;
+		};
+		10F4711DE1E516881A0222CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		28CECCE62F0C9FFD7D9F4F6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4BBA653186FC832320380E92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		5300F9C2E207FF282B668C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AMSNutritionCompanionMac.app/Contents/MacOS/AMSNutritionCompanionMac";
+			};
+			name = Debug;
+		};
+		760FF3F018738A20609A4321 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AMS NutritionCompanion";
+				INFOPLIST_KEY_CFBundleShortVersionString = 0.1.0;
+				INFOPLIST_KEY_CFBundleVersion = 1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		82F0E143AD8CBB0724A8ED93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = AMSNutritionCompanionMac;
+			};
+			name = Release;
+		};
+		AD9D8BEC216C7A42BE553823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AMS NutritionCompanion";
+				INFOPLIST_KEY_CFBundleShortVersionString = 0.1.0;
+				INFOPLIST_KEY_CFBundleVersion = 1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E44B4380C0BDFDB25A678848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ams.nutritioncompanion;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0914AD8A7FFD1F961F539B09 /* Build configuration list for PBXNativeTarget "AMSNutritionCompanionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5300F9C2E207FF282B668C0A /* Debug */,
+				0E0B8DC8E52EDD5C1401C479 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3357CD2A8006A9B7C5E12BDB /* Build configuration list for PBXNativeTarget "AMSNutritionCompanionUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FEC6AAAA00B5E8A6603B04 /* Debug */,
+				82F0E143AD8CBB0724A8ED93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6B765F4477C7209817FF6BC6 /* Build configuration list for PBXProject "AMSNutritionCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				760FF3F018738A20609A4321 /* Debug */,
+				AD9D8BEC216C7A42BE553823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		70007BB2199A503BEF93F77A /* Build configuration list for PBXNativeTarget "AMSNutritionCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E44B4380C0BDFDB25A678848 /* Debug */,
+				28CECCE62F0C9FFD7D9F4F6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F630ED2D41E6DFF945B118D2 /* Build configuration list for PBXNativeTarget "AMSNutritionCompanionMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10F4711DE1E516881A0222CA /* Debug */,
+				4BBA653186FC832320380E92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5EFECFCE5F5FD99C5326D344 /* Project object */;
+}

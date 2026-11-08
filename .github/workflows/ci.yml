@@ -1,0 +1,19 @@
+name: Apple app CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  macOS:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Build iOS app
+        run: xcodebuild -project AMSNutritionCompanion.xcodeproj -scheme AMSNutritionCompanion -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+      - name: Run Mac UI tests
+        run: xcodebuild -project AMSNutritionCompanion.xcodeproj -scheme AMSNutritionCompanionMac -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO test

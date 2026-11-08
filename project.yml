@@ -1,0 +1,76 @@
+name: AMSNutritionCompanion
+options:
+  bundleIdPrefix: com.ams
+  deploymentTarget:
+    iOS: "18.0"
+    macOS: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+    ENABLE_PREVIEWS: YES
+    GENERATE_INFOPLIST_FILE: YES
+    INFOPLIST_KEY_CFBundleDisplayName: AMS NutritionCompanion
+    INFOPLIST_KEY_CFBundleShortVersionString: "0.1.0"
+    INFOPLIST_KEY_CFBundleVersion: "1"
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  AMSNutritionCompanion:
+    type: application
+    platform: iOS
+    sources: [Sources, Resources/SeedProducts.json]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ams.nutritioncompanion
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SUPPORTS_MACCATALYST: NO
+        SWIFT_EMIT_LOC_STRINGS: YES
+  AMSNutritionCompanionMac:
+    type: application
+    platform: macOS
+    sources: [Sources, Resources/SeedProducts.json]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ams.nutritioncompanion
+        SWIFT_EMIT_LOC_STRINGS: YES
+        ENABLE_APP_SANDBOX: YES
+  AMSNutritionCompanionTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [Tests]
+    dependencies:
+      - target: AMSNutritionCompanionMac
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ams.nutritioncompanion.tests
+        GENERATE_INFOPLIST_FILE: YES
+  AMSNutritionCompanionUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources: [UITests]
+    dependencies:
+      - target: AMSNutritionCompanionMac
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ams.nutritioncompanion.uitests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  AMSNutritionCompanion:
+    build:
+      targets:
+        AMSNutritionCompanion: all
+    run:
+      config: Debug
+  AMSNutritionCompanionMac:
+    build:
+      targets:
+        AMSNutritionCompanionMac: all
+        AMSNutritionCompanionTests: [test]
+        AMSNutritionCompanionUITests: [test]
+    run:
+      config: Debug
+    test:
+      targets:
+        - AMSNutritionCompanionTests
+        - AMSNutritionCompanionUITests

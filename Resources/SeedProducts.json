@@ -1,0 +1,1710 @@
+{
+  "catalogStatus": "proposed_candidates_for_joint_household_review",
+  "marketScope": [
+    "SE (Sweden; Norrköping priority)",
+    "DE (Germany)"
+  ],
+  "manualEntryNote": "No store availability, package sizes, or prices are prefilled. Martin and Anna should add store and package details and set acceptable price limits after checking products together.",
+  "products": [
+    {
+      "id": "blueberries-fresh",
+      "name": "Blueberries, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole blueberries only; no syrup, sugar, or coating. Processing check: Fresh whole fruit; wash before serving.",
+      "selectionGuide": "Choose dry, plump berries; check the bottom of the punnet for crushed or mouldy fruit.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "raspberries-fresh",
+      "name": "Raspberries, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole raspberries only; no sweetener or coating. Processing check: Fresh whole fruit; handle gently and wash as needed.",
+      "selectionGuide": "Choose dry berries that hold their shape, with no juice pooling or mould in the punnet.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "strawberries-fresh",
+      "name": "Strawberries, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole strawberries only; no added sugar or glaze. Processing check: Fresh whole fruit; remove damaged berries and wash.",
+      "selectionGuide": "Look for dry, firm berries with fresh green tops and no soft or mouldy spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "blackberries-fresh",
+      "name": "Blackberries, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole blackberries only; no sweetener or coating. Processing check: Fresh whole fruit; wash before serving.",
+      "selectionGuide": "Choose plump, dark berries that are dry and intact, with no mould or leaking juice.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "lingonberries-fresh",
+      "name": "Lingonberries, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole lingonberries only; avoid sweetened sauce or jam. Processing check: Fresh whole fruit; wash before serving.",
+      "selectionGuide": "Choose firm, bright berries with no shrivelled or mouldy fruit; fresh stock may be seasonal.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "red-currants-fresh",
+      "name": "Red currants, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole red currants only; no added sugar. Processing check: Fresh whole fruit; wash before serving.",
+      "selectionGuide": "Choose firm, bright clusters with intact stems and no mould or crushed berries.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "black-currants-fresh",
+      "name": "Black currants, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole black currants only; no added sugar. Processing check: Fresh whole fruit; wash before serving.",
+      "selectionGuide": "Choose plump, dark berries without shrivelling, mould, or wet patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "gooseberries-fresh",
+      "name": "Gooseberries, fresh",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole gooseberries only; no syrup or added sugar. Processing check: Fresh whole fruit; wash before serving.",
+      "selectionGuide": "Choose firm berries with unbroken skins; avoid soft, leaking, or mouldy ones.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "blueberries-frozen",
+      "name": "Blueberries, frozen",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Blueberries as the only ingredient; no sweetener. Processing check: Frozen whole fruit; check that no sugar or sauce is added.",
+      "selectionGuide": "Choose a sealed bag with loose berries rather than one frozen into a solid lump.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "raspberries-frozen",
+      "name": "Raspberries, frozen",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Raspberries as the only ingredient; no sweetener. Processing check: Frozen whole fruit; check that no sugar or sauce is added.",
+      "selectionGuide": "Choose a sealed, undamaged bag with berries mostly separate, not thawed and refrozen.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "strawberries-frozen",
+      "name": "Strawberries, frozen",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Strawberries as the only ingredient; no sweetener. Processing check: Frozen whole fruit; check that no sugar or sauce is added.",
+      "selectionGuide": "Choose a sealed bag with intact frozen berries and no signs of thawing.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "mixed-forest-berries-frozen",
+      "name": "Mixed forest berries, frozen",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "A mix of whole berries only; no added sugar or flavouring. Processing check: Frozen fruit mix; check the ingredient list and avoid sweetened mixes.",
+      "selectionGuide": "Choose a sealed bag with loose frozen berries and a clear berry-only ingredient list.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "black-currants-frozen",
+      "name": "Black currants, frozen",
+      "category": "Berries",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Black currants as the only ingredient; no sweetener. Processing check: Frozen whole fruit; check that no sugar or sauce is added.",
+      "selectionGuide": "Choose a sealed bag with berries loose inside and no thawing damage.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "apples",
+      "name": "Apples",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole apples; choose the variety and size Anna approves. Processing check: Fresh whole fruit; wash before eating.",
+      "selectionGuide": "Choose firm apples with smooth skins and no bruises or soft spots; select a ripe-to-eat firmness you prefer.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pears",
+      "name": "Pears",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole pears; avoid bruised or leaking fruit. Processing check: Fresh whole fruit; wash before eating.",
+      "selectionGuide": "Choose intact pears; a slight give near the stem indicates ripeness, while mushy areas mean overripe.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "bananas",
+      "name": "Bananas",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole bananas; no coating or sweetened preparation. Processing check: Fresh whole fruit; peel before eating.",
+      "selectionGuide": "Choose the ripeness you need: green for later, yellow for soon; avoid split skins or bruising.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "oranges",
+      "name": "Oranges",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole oranges; avoid waxed or prepared fruit if the package adds ingredients. Processing check: Fresh whole fruit; wash the peel before cutting.",
+      "selectionGuide": "Choose firm oranges that feel heavy for their size, with no soft or mouldy areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "clementines",
+      "name": "Clementines",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole clementines; no syrup or added sugar. Processing check: Fresh whole fruit; wash before peeling.",
+      "selectionGuide": "Choose firm, heavy fruit with smooth skins and no soft patches or mould.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "lemons",
+      "name": "Lemons",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole lemons; no preserved or sweetened preparation. Processing check: Fresh whole fruit; wash the peel before use.",
+      "selectionGuide": "Choose firm lemons that feel heavy for their size, with bright intact skins and no soft spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "kiwifruit",
+      "name": "Kiwifruit",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole kiwifruit; no sweetened or dried preparation. Processing check: Fresh whole fruit; wash before cutting.",
+      "selectionGuide": "Choose unbruised fruit; a gentle give means ready to eat, while firm fruit can ripen at home.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "avocados",
+      "name": "Avocados",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole avocados; no pre-seasoned or dressed preparation. Processing check: Fresh whole fruit; wash the skin before cutting.",
+      "selectionGuide": "Choose according to timing: firm for later or gently yielding for today; avoid sunken, very soft, or cracked spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "grapes",
+      "name": "Grapes",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole grapes; no coating or sweetened preparation. Processing check: Fresh whole fruit; wash before eating.",
+      "selectionGuide": "Choose firm grapes attached to fresh-looking stems; avoid leaking, shrivelled, or mouldy clusters.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "plums",
+      "name": "Plums",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole plums; no syrup or added sugar. Processing check: Fresh whole fruit; wash before eating.",
+      "selectionGuide": "Choose intact plums with natural bloom and slight give when ripe; avoid split or very soft fruit.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "peaches-or-nectarines",
+      "name": "Peaches or nectarines",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole peaches or nectarines; no syrup or glaze. Processing check: Fresh whole fruit; wash before eating.",
+      "selectionGuide": "Choose fragrant fruit with unbroken skin and a slight give; avoid bruises and leaking areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "melon",
+      "name": "Melon",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole melon; avoid cut pieces stored warm or with added syrup. Processing check: Fresh whole fruit; wash rind before cutting.",
+      "selectionGuide": "Choose an intact melon that feels heavy for its size; check for a fresh smell near the stem and no soft patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pineapple",
+      "name": "Pineapple",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole pineapple; no syrup or added sugar. Processing check: Fresh whole fruit; wash the rind before cutting.",
+      "selectionGuide": "Choose a heavy fruit with fresh green leaves and an even, sweet smell; avoid soft or leaking areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pomegranate",
+      "name": "Pomegranate",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole pomegranate; avoid sweetened juice or prepared seeds with additives. Processing check: Fresh whole fruit; wash the outside before opening.",
+      "selectionGuide": "Choose a heavy fruit with firm, unbroken skin and no soft or mouldy patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "mango",
+      "name": "Mango",
+      "category": "Fruit",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole mango; no syrup or sweetened preparation. Processing check: Fresh whole fruit; wash the skin before cutting.",
+      "selectionGuide": "Choose intact fruit that gives slightly when gently pressed; colour alone does not determine ripeness.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "carrots",
+      "name": "Carrots",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole carrots; loose or simply bagged, without dip or glaze. Processing check: Fresh whole vegetable; wash or peel as preferred.",
+      "selectionGuide": "Choose firm, smooth carrots without cracks, limpness, or soft dark areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "broccoli",
+      "name": "Broccoli",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole broccoli; no sauce or seasoning. Processing check: Fresh whole vegetable; wash before cooking.",
+      "selectionGuide": "Choose tight, dark green florets and a firm stem; avoid yellowing or slimy areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "cauliflower",
+      "name": "Cauliflower",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole cauliflower; no sauce or seasoning. Processing check: Fresh whole vegetable; wash before cooking.",
+      "selectionGuide": "Choose a compact, firm head with pale florets and fresh leaves; avoid brown soft patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "red-cabbage",
+      "name": "Red cabbage",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole red cabbage; avoid prepared salad with dressing. Processing check: Fresh whole vegetable; wash outer leaves before cutting.",
+      "selectionGuide": "Choose a dense, heavy head with crisp outer leaves and no soft spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "savoy-cabbage",
+      "name": "Savoy cabbage",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole savoy cabbage; no seasoning or sauce. Processing check: Fresh whole vegetable; wash leaves before use.",
+      "selectionGuide": "Choose a firm head with crisp, green crinkled leaves and no slimy or damaged areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "kale",
+      "name": "Kale",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole kale leaves; no sauce or seasoning. Processing check: Fresh whole vegetable; wash thoroughly before use.",
+      "selectionGuide": "Choose crisp, deep green leaves without yellowing, sliminess, or extensive holes.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "spinach",
+      "name": "Spinach",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain spinach leaves; no dressing or seasoning. Processing check: Fresh leaves; wash unless the package clearly says ready to eat.",
+      "selectionGuide": "Choose crisp green leaves with no sliminess or yellowing; check bagged leaves for condensation.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "romaine-lettuce",
+      "name": "Romaine lettuce",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole lettuce; no prepared dressing or toppings. Processing check: Fresh whole vegetable; wash leaves before eating.",
+      "selectionGuide": "Choose a firm heart with crisp, fresh leaves and no brown or slimy edges.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "tomatoes",
+      "name": "Tomatoes",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole tomatoes; no sauce or seasoning. Processing check: Fresh whole vegetable; wash before eating.",
+      "selectionGuide": "Choose firm, fragrant tomatoes with smooth skins and no splits, bruises, or leaking spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "red-bell-peppers",
+      "name": "Red bell peppers",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole peppers; no stuffing, sauce, or seasoning. Processing check: Fresh whole vegetable; wash before cutting.",
+      "selectionGuide": "Choose firm, shiny peppers with taut skins, fresh stems, and no soft or wrinkled patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "cucumber",
+      "name": "Cucumber",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole cucumber; avoid pickled or dressed versions for this item. Processing check: Fresh whole vegetable; wash before slicing.",
+      "selectionGuide": "Choose a firm cucumber with even colour and no soft ends, wrinkles, or cuts.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "zucchini",
+      "name": "Zucchini",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole zucchini; no sauce or seasoning. Processing check: Fresh whole vegetable; wash before cooking.",
+      "selectionGuide": "Choose a firm, smaller-to-medium zucchini with smooth skin and no soft bruises.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "aubergine",
+      "name": "Aubergine",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole aubergine; no prepared dip or seasoning. Processing check: Fresh whole vegetable; wash before cooking.",
+      "selectionGuide": "Choose a firm, glossy aubergine with taut skin and a fresh green cap; avoid dents or soft spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "sweet-potatoes",
+      "name": "Sweet potatoes",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole sweet potatoes; no glaze or seasoning. Processing check: Fresh whole vegetable; scrub before cooking.",
+      "selectionGuide": "Choose firm roots with intact skins; avoid damp, bruised, or sprouting pieces.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "potatoes",
+      "name": "Potatoes",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole potatoes; avoid pre-fried or seasoned products. Processing check: Fresh whole vegetable; scrub and remove damaged areas.",
+      "selectionGuide": "Choose firm potatoes without green areas, deep bruises, dampness, or extensive sprouting.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "beetroot",
+      "name": "Beetroot",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole beetroot; avoid pickled versions for this item. Processing check: Fresh whole vegetable; scrub before cooking.",
+      "selectionGuide": "Choose firm, smooth roots with no cuts, soft areas, or shrivelling; leaves should look fresh if attached.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "parsnips",
+      "name": "Parsnips",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole parsnips; no glaze or seasoning. Processing check: Fresh whole vegetable; scrub before cooking.",
+      "selectionGuide": "Choose firm roots with smooth skins and no soft, cracked, or shrivelled areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "yellow-onions",
+      "name": "Yellow onions",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole yellow onions; no seasoning mix. Processing check: Fresh whole vegetable; store dry and ventilated.",
+      "selectionGuide": "Choose firm, dry onions with papery skins and no damp, sprouting, or soft areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "leeks",
+      "name": "Leeks",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole leeks; no sauce or seasoning. Processing check: Fresh whole vegetable; rinse between the leaves.",
+      "selectionGuide": "Choose firm leeks with crisp green tops and a clean white stem; avoid slimy or yellowing leaves.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "celery-stalks",
+      "name": "Celery stalks",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain celery stalks; no dip or seasoning. Processing check: Fresh whole vegetable; wash before cutting.",
+      "selectionGuide": "Choose crisp, firm stalks with fresh leaves and no limpness or brown, soft patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "asparagus",
+      "name": "Asparagus",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain asparagus; no sauce or seasoning. Processing check: Fresh whole vegetable; wash before cooking.",
+      "selectionGuide": "Choose firm spears with closed tips and freshly cut ends; avoid limp or dried-out stems.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "green-beans",
+      "name": "Green beans",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain green beans; fresh or frozen without sauce. Processing check: Whole vegetable; frozen version should list green beans only.",
+      "selectionGuide": "Choose crisp pods that snap easily, with bright colour and no slimy spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "green-peas",
+      "name": "Green peas",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain peas; no sauce, salt, or seasoning added. Processing check: Whole vegetable; frozen version should list peas only.",
+      "selectionGuide": "For fresh pods, choose firm bright green pods; for frozen, choose a sealed bag with loose peas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "brussels-sprouts",
+      "name": "Brussels sprouts",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole Brussels sprouts; no glaze or seasoning. Processing check: Fresh whole vegetable; wash and trim before cooking.",
+      "selectionGuide": "Choose firm, compact sprouts with green leaves and no yellowing or soft areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "fennel-bulb",
+      "name": "Fennel bulb",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole fennel; no dressing or seasoning. Processing check: Fresh whole vegetable; wash before cutting.",
+      "selectionGuide": "Choose a firm, pale bulb with crisp fronds and no brown, soft, or split areas.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "celeriac",
+      "name": "Celeriac",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole celeriac; no prepared mash or seasoning. Processing check: Fresh whole vegetable; scrub and peel before use.",
+      "selectionGuide": "Choose a firm, heavy root with no soft or damp patches; surface roughness is normal.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "radishes",
+      "name": "Radishes",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole radishes; no dip or seasoning. Processing check: Fresh whole vegetable; wash before eating.",
+      "selectionGuide": "Choose firm, smooth radishes with fresh leaves if attached and no cracks or soft spots.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pumpkin",
+      "name": "Pumpkin",
+      "category": "Vegetables",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole pumpkin; no filling, glaze, or seasoning. Processing check: Fresh whole vegetable; wash rind before cutting.",
+      "selectionGuide": "Choose a firm pumpkin with intact skin and a dry stem; avoid soft or leaking patches.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "green-lentils-dried",
+      "name": "Green lentils, dried",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Green lentils as the only ingredient; no seasoning mix. Processing check: Plain dried legume; check the label for added flavourings.",
+      "selectionGuide": "Choose a sealed, dry pack with intact lentils and a clear best-before date.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "red-lentils-dried",
+      "name": "Red lentils, dried",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Red lentils as the only ingredient. Processing check: Plain dried legume; no seasoning or flavouring needed.",
+      "selectionGuide": "Choose a sealed, dry pack with no moisture or damaged packaging.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "chickpeas-dried",
+      "name": "Chickpeas, dried",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Dried chickpeas as the only ingredient. Processing check: Plain dried legume; soak and cook at home.",
+      "selectionGuide": "Choose a sealed pack with dry, intact chickpeas and no signs of moisture.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "chickpeas-canned",
+      "name": "Chickpeas, canned",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Chickpeas, water, and optionally salt; no sauce or seasoning. Processing check: Simply canned legume; rinse if desired and check for added ingredients.",
+      "selectionGuide": "Choose an undented, non-bulging can with an intact seam and readable ingredient list.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "black-beans-canned",
+      "name": "Black beans, canned",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Black beans, water, and optionally salt; no sauce or seasoning. Processing check: Simply canned legume; check for added ingredients.",
+      "selectionGuide": "Choose an undented, non-bulging can; compare ingredient lists for a plain option.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "kidney-beans-canned",
+      "name": "Kidney beans, canned",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Kidney beans, water, and optionally salt; no sauce or seasoning. Processing check: Simply canned legume; check for added ingredients.",
+      "selectionGuide": "Choose an undented, non-bulging can with intact packaging.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "cannellini-beans-canned",
+      "name": "Cannellini beans, canned",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Cannellini beans, water, and optionally salt; no sauce or seasoning. Processing check: Simply canned legume; check for added ingredients.",
+      "selectionGuide": "Choose an undented can with a plain ingredient list and intact seal.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "brown-beans-canned",
+      "name": "Brown beans, canned",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Brown beans in water, optionally salt; no syrup, sauce, or seasoning. Processing check: Choose plain beans rather than a prepared sweetened dish.",
+      "selectionGuide": "Choose a plain pack or can; check carefully because prepared versions may be sweetened or sauced.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "yellow-split-peas-dried",
+      "name": "Yellow split peas, dried",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Yellow split peas as the only ingredient. Processing check: Plain dried legume; cook at home without a seasoning mix.",
+      "selectionGuide": "Choose a sealed, dry pack with whole, dry peas and no moisture damage.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "edamame-frozen",
+      "name": "Edamame, frozen",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Shelled or in-pod edamame only; no salt, sauce, or seasoning. Processing check: Plain frozen soybeans; check that no sauce is included.",
+      "selectionGuide": "Choose a sealed bag with beans loose inside and no thawing damage.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "firm-tofu-plain",
+      "name": "Firm tofu, plain",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain tofu; avoid marinated, smoked, or flavoured versions. Processing check: Household-accepted simple staple; check ingredients and review the exact product together.",
+      "selectionGuide": "Choose a sealed, chilled pack with a clear use-by date and no swollen or leaking packaging.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "silken-tofu-plain",
+      "name": "Silken tofu, plain",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain silken tofu; no flavouring or sauce. Processing check: Household-accepted simple staple; check ingredients and review the exact product together.",
+      "selectionGuide": "Choose an intact pack within date; follow its storage instructions, since packs may be shelf-stable or chilled.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "tempeh-plain",
+      "name": "Tempeh, plain",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain tempeh; avoid flavoured or marinated versions. Processing check: Fermented soy staple; review the ingredient list together for the household's processing rule.",
+      "selectionGuide": "Choose a sealed chilled pack within date with no added marinade or seasoning.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "mung-beans-dried",
+      "name": "Mung beans, dried",
+      "category": "Beans & legumes",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Mung beans as the only ingredient. Processing check: Plain dried legume; soak or cook at home.",
+      "selectionGuide": "Choose a sealed, dry pack with intact beans and no signs of moisture.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "walnuts-unsalted",
+      "name": "Walnuts, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain walnuts; no salt, sugar, oil, or flavour coating. Processing check: Whole nuts; choose raw or dry-roasted with no added ingredients.",
+      "selectionGuide": "Choose a sealed pack with intact nuts and a recent best-before date; avoid rancid or stale odour.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "almonds-unsalted",
+      "name": "Almonds, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain almonds; no salt, sugar, oil, or flavour coating. Processing check: Whole nuts; choose raw or dry-roasted with no added ingredients.",
+      "selectionGuide": "Choose a sealed pack with intact nuts and no stale or rancid smell.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "hazelnuts-unsalted",
+      "name": "Hazelnuts, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain hazelnuts; no sugar, salt, or coating. Processing check: Whole nuts; choose raw or dry-roasted with no added ingredients.",
+      "selectionGuide": "Choose a sealed pack of intact nuts; avoid damp packaging or stale odour.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pistachios-unsalted",
+      "name": "Pistachios, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain pistachios; unsalted and unflavoured. Processing check: Whole nuts; check that no coating or seasoning is added.",
+      "selectionGuide": "Choose a sealed pack; if shelled, look for intact kernels without stale odour.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "cashews-unsalted",
+      "name": "Cashews, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain cashews; unsalted and unflavoured. Processing check: Whole nuts; choose raw or dry-roasted with no added ingredients.",
+      "selectionGuide": "Choose a sealed pack of whole or mostly intact nuts with no stale odour.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "peanuts-unsalted",
+      "name": "Peanuts, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain peanuts; no added salt, sugar, or flavour coating. Processing check: Whole legumes sold as nuts; choose plain rather than coated snack mixes.",
+      "selectionGuide": "Choose a sealed pack and check whether shells or kernels suit the intended use.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "chia-seeds",
+      "name": "Chia seeds",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Chia seeds only; no sweetener or flavouring. Processing check: Plain seed; check that no mix-ins are added.",
+      "selectionGuide": "Choose a sealed, dry pack with no moisture clumps and an intact closure.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "ground-flaxseed",
+      "name": "Ground flaxseed",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Ground flaxseed only; no sweetener or flavouring. Processing check: Single-ingredient seed product; check storage guidance on the pack.",
+      "selectionGuide": "Choose a sealed pack with a clear best-before date and store it as directed after opening.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pumpkin-seeds-unsalted",
+      "name": "Pumpkin seeds, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain pumpkin seeds; no salt, sugar, or coating. Processing check: Whole seeds; choose raw or dry-roasted with no added ingredients.",
+      "selectionGuide": "Choose a sealed pack with dry, intact seeds and no stale smell.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "sunflower-seeds-unsalted",
+      "name": "Sunflower seeds, unsalted",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plain sunflower seeds; no salt, sugar, or coating. Processing check: Whole seeds; choose raw or dry-roasted with no added ingredients.",
+      "selectionGuide": "Choose a sealed pack with dry seeds and an intact closure.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "hemp-seeds-hulled",
+      "name": "Hemp seeds, hulled",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Hemp seeds only; no flavouring or sweetener. Processing check: Single-ingredient seed product; check storage guidance on the pack.",
+      "selectionGuide": "Choose a sealed, dry pack within date; follow storage directions after opening.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "sesame-seeds",
+      "name": "Sesame seeds",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Sesame seeds only; no flavouring or coating. Processing check: Single-ingredient seed product; check that no seasoning is added.",
+      "selectionGuide": "Choose a sealed dry pack without moisture or stale odour.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "tahini-plain",
+      "name": "Tahini, plain",
+      "category": "Nuts & seeds",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Sesame seeds only, or sesame with a small amount of salt; no sweetener or flavouring. Processing check: Simple ground-seed paste; check the ingredient list and stir if separated.",
+      "selectionGuide": "Choose an intact jar with a clear best-before date; natural oil separation can be stirred in.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "rolled-oats",
+      "name": "Rolled oats",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Oats only; no sugar, flavouring, or instant-mix additions. Processing check: Plain grain staple; avoid sweetened flavoured porridge sachets.",
+      "selectionGuide": "Choose a dry sealed pack with plain flakes and no added flavour sachets.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "steel-cut-oats",
+      "name": "Steel-cut oats",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Oats only; no flavouring or sweetener. Processing check: Plain grain staple; cook at home.",
+      "selectionGuide": "Choose a sealed pack of dry oat pieces with no mix-ins.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "buckwheat-groats",
+      "name": "Buckwheat groats",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Buckwheat groats only. Processing check: Plain grain-like seed; check for added seasoning.",
+      "selectionGuide": "Choose a sealed dry pack with no moisture damage or seasoning.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "pearl-barley",
+      "name": "Pearl barley",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Barley only; no seasoning packet. Processing check: Plain grain staple; cook at home.",
+      "selectionGuide": "Choose a dry sealed pack; check that it is plain barley rather than a seasoned mix.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "quinoa",
+      "name": "Quinoa",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Quinoa only; no flavoured or instant mix. Processing check: Plain seed staple; rinse and cook at home.",
+      "selectionGuide": "Choose a dry sealed pack with a clear ingredient list and no seasoning sachet.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "brown-rice",
+      "name": "Brown rice",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Brown rice only; no seasoning or sauce. Processing check: Plain whole-grain staple; cook at home.",
+      "selectionGuide": "Choose a sealed dry pack with intact grains and no flavour sachet.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "rye-kernels",
+      "name": "Rye kernels",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Rye kernels only. Processing check: Plain grain staple; cook at home.",
+      "selectionGuide": "Choose a dry sealed pack of whole rye kernels with no mix-ins.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "wholegrain-rye-crispbread",
+      "name": "Wholegrain rye crispbread",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Wholegrain rye-based crispbread; no sweet coating, cheese, or flavour dusting. Processing check: Packaged grain staple; review the ingredient list together and avoid garlic-seasoned varieties.",
+      "selectionGuide": "Choose a sealed pack; compare options and choose one with rye prominent and a short ingredient list.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "wholegrain-rye-bread",
+      "name": "Wholegrain rye bread",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Simple bread with wholegrain flour, water, yeast or sourdough, and modest basic ingredients; no garlic or animal ingredients. Processing check: Bread recipes vary; check the full ingredient list and review the chosen loaf together.",
+      "selectionGuide": "Choose a fresh or frozen loaf with rye or wholegrain flour prominent and no mould or damaged pack.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "whole-wheat-pasta",
+      "name": "Whole-wheat pasta",
+      "category": "Whole grains",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Whole-wheat durum wheat or whole-wheat flour and water; no sauce or flavouring. Processing check: Plain dried grain staple; cook at home.",
+      "selectionGuide": "Choose a sealed pack of dry pasta with no seasoning sachet.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "unsweetened-soy-yoghurt-plain",
+      "name": "Unsweetened soy yoghurt, plain",
+      "category": "Plant-based staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plant-based, plain, unsweetened; no dairy ingredients, flavouring, or sweetener. Processing check: Household-accepted simple staple; formulations vary, so review the full ingredient list together.",
+      "selectionGuide": "Choose a chilled, sealed tub within date; check the front and ingredient list for unsweetened plain style.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "unsweetened-oat-yoghurt-plain",
+      "name": "Unsweetened oat yoghurt, plain",
+      "category": "Plant-based staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plant-based, plain, unsweetened; no dairy ingredients, flavouring, or sweetener. Processing check: Packaged plant staple; formulations vary, so review processing and ingredients together.",
+      "selectionGuide": "Choose a chilled, sealed tub within date; compare plain options and check for added sweeteners.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "unsweetened-soy-drink-plain",
+      "name": "Unsweetened soy drink, plain",
+      "category": "Plant-based staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plant-based and unsweetened; no dairy ingredients or flavouring; household to decide on fortification and added ingredients. Processing check: Packaged plant drink; formulations vary, so review the label together rather than assuming all versions fit.",
+      "selectionGuide": "Choose a sealed carton within date; check that it is plain and unsweetened, and note whether it is fortified.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "unsweetened-oat-drink-plain",
+      "name": "Unsweetened oat drink, plain",
+      "category": "Plant-based staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Plant-based and unsweetened; no dairy ingredients or flavouring; household to decide on fortification and added ingredients. Processing check: Packaged plant drink; formulations vary, so review the label together rather than assuming all versions fit.",
+      "selectionGuide": "Choose a sealed carton within date; check that it is plain and unsweetened, and note whether it is fortified.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "extra-virgin-olive-oil",
+      "name": "Extra-virgin olive oil",
+      "category": "Cooking staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Extra-virgin olive oil only; no infused flavouring. Processing check: Single-ingredient oil; check the label and storage instructions.",
+      "selectionGuide": "Choose a sealed dark or opaque bottle with harvest or best-before information; check for leaks or damaged seals.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "cold-pressed-rapeseed-oil",
+      "name": "Cold-pressed rapeseed oil",
+      "category": "Cooking staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Rapeseed oil only; no infused flavouring. Processing check: Single-ingredient oil; check the label and storage instructions.",
+      "selectionGuide": "Choose a sealed bottle with clear oil type and best-before date; avoid leaks or damaged caps.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    },
+    {
+      "id": "tomato-passata-plain",
+      "name": "Tomato passata, plain",
+      "category": "Cooking staples",
+      "suggestedProduct": null,
+      "packageSize": null,
+      "ingredientsCriteria": "Tomatoes only, optionally a small amount of salt; no added sugar, garlic, mushroom, or seasoning. Processing check: Simple packaged tomato staple; check every product's ingredient list.",
+      "selectionGuide": "Choose an intact carton or jar with a short ingredient list and no added sauce flavourings.",
+      "countries": [
+        "SE",
+        "DE"
+      ],
+      "approved": false,
+      "stores": [],
+      "minimumPrice": null,
+      "maximumPrice": null
+    }
+  ]
+}
