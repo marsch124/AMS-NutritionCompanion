@@ -2,6 +2,17 @@ import XCTest
 
 @MainActor
 final class ShoppingScreenUITests: XCTestCase {
+    func testLabelGuideCanBeOpenedAsAnInAppDestination() {
+        let app = XCUIApplication()
+        app.launch()
+
+        let guideNavigation = app.descendants(matching: .any)["sidebar.labelGuide"]
+        XCTAssertTrue(guideNavigation.waitForExistence(timeout: 10))
+        guideNavigation.click()
+        XCTAssertTrue(app.descendants(matching: .any)["labelGuide.screen"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["guide.done"].exists)
+    }
+
     func testShoppingScreenExposesStableListAddAndStoreFilterIdentifiers() {
         let app = XCUIApplication()
         app.launch()
