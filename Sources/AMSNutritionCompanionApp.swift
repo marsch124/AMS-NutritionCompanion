@@ -385,7 +385,7 @@ struct PantryRootView: View {
                 TextField("Search foods", text: $store.search).textFieldStyle(.roundedBorder).focused($searchFocused).accessibilityIdentifier("shopping.search")
             }.padding(.horizontal).padding(.vertical, 10) }
             #endif
-            List {
+            List(selection: $selection) {
                 let listItems = store.visibleShoppingItems
                 if listItems.isEmpty {
                     EmptyStateView(title: "Your list is empty", detail: "Add household-approved foods from the product library.")
@@ -410,7 +410,7 @@ struct PantryRootView: View {
     }
 
     private var libraryList: some View {
-        List {
+        List(selection: $selection) {
             ForEach(store.categories, id: \.self) { category in
                 Section(category) {
                     ForEach(store.visibleProducts.filter { $0.category == category }) { product in productRow(product) }
@@ -461,6 +461,7 @@ struct PantryRootView: View {
         }
         .contentShape(Rectangle()).onTapGesture { selection = product.id }
         .tag(product.id)
+        .accessibilityIdentifier("library.row.\(product.id)")
         #else
             NavigationLink(value: product.id) {
             HStack(spacing: 12) {
@@ -477,6 +478,7 @@ struct PantryRootView: View {
                 Button("Add") { store.addToShoppingList(productID: product.id) }.tint(PantryStyle.green)
             }
         }
+        .accessibilityIdentifier("library.row.\(product.id)")
         #endif
     }
     private var currency: String { store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR" }
