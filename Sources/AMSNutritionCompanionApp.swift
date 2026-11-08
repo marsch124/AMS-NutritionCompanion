@@ -73,15 +73,13 @@ struct PantryProduct: Codable, Identifiable, Hashable {
     var minimumPrice: Double?
     var maximumPrice: Double?
     var priceCurrency: String?
-    var listQuantity: String?
-    var checked = false
     var imageData: Data?
 
-    enum CodingKeys: String, CodingKey { case id, name, category, suggestedProduct, packageSize, ingredientsCriteria, selectionGuide, countries, approved, martinApproved, annaApproved, stores, minimumPrice, maximumPrice, priceCurrency, listQuantity, checked, imageData }
-    init(id: String, name: String, category: String, suggestedProduct: String?, packageSize: String?, ingredientsCriteria: String, selectionGuide: String, countries: [String], approved: Bool, martinApproved: Bool = false, annaApproved: Bool = false, stores: [String], minimumPrice: Double?, maximumPrice: Double?, priceCurrency: String? = nil, listQuantity: String?, checked: Bool = false, imageData: Data? = nil) {
+    enum CodingKeys: String, CodingKey { case id, name, category, suggestedProduct, packageSize, ingredientsCriteria, selectionGuide, countries, approved, martinApproved, annaApproved, stores, minimumPrice, maximumPrice, priceCurrency, imageData }
+    init(id: String, name: String, category: String, suggestedProduct: String?, packageSize: String?, ingredientsCriteria: String, selectionGuide: String, countries: [String], approved: Bool, martinApproved: Bool = false, annaApproved: Bool = false, stores: [String], minimumPrice: Double?, maximumPrice: Double?, priceCurrency: String? = nil, imageData: Data? = nil) {
         self.id = id; self.name = name; self.category = category; self.suggestedProduct = suggestedProduct; self.packageSize = packageSize
         self.ingredientsCriteria = ingredientsCriteria; self.selectionGuide = selectionGuide; self.countries = countries; self.approved = approved; self.martinApproved = martinApproved; self.annaApproved = annaApproved
-        self.stores = stores; self.minimumPrice = minimumPrice; self.maximumPrice = maximumPrice; self.priceCurrency = priceCurrency; self.listQuantity = listQuantity; self.checked = checked; self.imageData = imageData
+        self.stores = stores; self.minimumPrice = minimumPrice; self.maximumPrice = maximumPrice; self.priceCurrency = priceCurrency; self.imageData = imageData
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -100,27 +98,69 @@ struct PantryProduct: Codable, Identifiable, Hashable {
         minimumPrice = try values.decodeIfPresent(Double.self, forKey: .minimumPrice)
         maximumPrice = try values.decodeIfPresent(Double.self, forKey: .maximumPrice)
         priceCurrency = try values.decodeIfPresent(String.self, forKey: .priceCurrency)
-        listQuantity = try values.decodeIfPresent(String.self, forKey: .listQuantity)
-        checked = try values.decodeIfPresent(Bool.self, forKey: .checked) ?? false
         imageData = try values.decodeIfPresent(Data.self, forKey: .imageData)
     }
+}
+
+struct ShoppingListEntry: Codable, Identifiable, Hashable {
+    var id: String
+    var productID: String
+    var quantity: String
+    var isChecked: Bool
+}
+
+struct ListedPantryProduct: Identifiable {
+    let entry: ShoppingListEntry
+    let product: PantryProduct
+    var id: String { entry.id }
 }
 
 @MainActor
 final class PantryStore: ObservableObject {
     @Published var products: [PantryProduct] { didSet { save() } }
+    @Published private(set) var shoppingListEntries: [ShoppingListEntry] { didSet { save() } }
+    @Published private(set) var persistenceWarning: String?
     @Published var selectedMarket = "Sweden · SEK"
     @Published var selectedStore = "All stores"
     @Published var search = ""
 
-    private let persistenceKey = "ams.pantry.products.v1"
-    private let markets = ["Sweden · SEK", "Germany · EUR"]
-    private let stores = ["All stores", "ICA", "Coop", "Willys", "Lidl", "Other"]
+    private let persistenceKey = "ams.pantry.state.v2"
+    private let legacyPersistenceKey = "ams.pantry.products.v1"
+    private let defaults: UserDefaults
+    private var canPersist = true
 
-    init() {
-        if let data = UserDefaults.standard.data(forKey: persistenceKey),
-           let saved = try? JSONDecoder().decode([PantryProduct].self, from: data) {
-            products = saved
+    private struct PersistedState: Codable {
+        var products: [PantryProduct]
+        var shoppingListEntries: [ShoppingListEntry]
+    }
+
+    init(defaults: UserDefaults = .standard, seedProducts: [PantryProduct]? = nil) {
+        self.defaults = defaults
+        persistenceWarning = nil
+        if let data = defaults.data(forKey: persistenceKey) {
+            if let saved = try? JSONDecoder().decode(PersistedState.self, from: data) {
+                products = saved.products
+                shoppingListEntries = saved.shoppingListEntries
+            } else {
+                products = []
+                shoppingListEntries = []
+                persistenceWarning = "Saved shopping data could not be read. The saved copy has been left untouched."
+                canPersist = false
+            }
+        } else if let legacyData = defaults.data(forKey: legacyPersistenceKey) {
+            if let migrated = Self.migrateLegacyData(legacyData) {
+                products = migrated.products
+                shoppingListEntries = migrated.shoppingListEntries
+                if let encoded = try? JSONEncoder().encode(migrated) { defaults.set(encoded, forKey: persistenceKey) }
+            } else {
+                products = []
+                shoppingListEntries = []
+                persistenceWarning = "Saved shopping data could not be read. The saved copy has been left untouched."
+                canPersist = false
+            }
+        } else if let seedProducts {
+            products = seedProducts
+            shoppingListEntries = []
         } else if let url = Bundle.main.url(forResource: "SeedProducts", withExtension: "json"),
                   let data = try? Data(contentsOf: url),
                   let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -128,28 +168,72 @@ final class PantryStore: ObservableObject {
                   let catalogData = try? JSONSerialization.data(withJSONObject: catalog),
                   let decoded = try? JSONDecoder().decode([PantryProduct].self, from: catalogData) {
             products = decoded
-        } else { products = [] }
+            shoppingListEntries = []
+        } else {
+            products = []
+            shoppingListEntries = []
+        }
     }
 
     var visibleProducts: [PantryProduct] {
-        products.filter { product in
-            (search.isEmpty || product.name.localizedCaseInsensitiveContains(search) || product.category.localizedCaseInsensitiveContains(search)) &&
-            (selectedStore == "All stores" || product.stores.contains(selectedStore)) &&
-            (selectedMarket.hasPrefix("Sweden") ? product.countries.contains("SE") : product.countries.contains("DE"))
-        }
+        products.filter(matchesCurrentFilters)
     }
     var categories: [String] { Array(Set(visibleProducts.map(\.category))).sorted() }
+    var visibleShoppingItems: [ListedPantryProduct] {
+        shoppingListEntries.compactMap { entry in
+            guard let product = product(entry.productID), matchesCurrentFilters(product) else { return nil }
+            return ListedPantryProduct(entry: entry, product: product)
+        }
+    }
+    var shoppingCategories: [String] { Array(Set(visibleShoppingItems.map(\.product.category))).sorted() }
     func product(_ id: String) -> PantryProduct? { products.first { $0.id == id } }
     func update(_ value: PantryProduct) { if let i = products.firstIndex(where: { $0.id == value.id }) { products[i] = value } }
     func add(_ value: PantryProduct) { products.insert(value, at: 0) }
-    func toggle(_ value: PantryProduct) { var p = value; p.checked.toggle(); update(p) }
+    func shoppingListEntry(for productID: String) -> ShoppingListEntry? { shoppingListEntries.first { $0.productID == productID } }
+    @discardableResult
+    func addToShoppingList(productID: String, quantity: String = "1") -> Bool {
+        guard product(productID)?.approved == true, shoppingListEntry(for: productID) == nil else { return false }
+        shoppingListEntries.append(ShoppingListEntry(id: UUID().uuidString, productID: productID, quantity: quantity, isChecked: false))
+        return true
+    }
+    func removeShoppingListItem(_ id: String) { shoppingListEntries.removeAll { $0.id == id } }
+    func toggleShoppingListItem(_ id: String) {
+        guard let index = shoppingListEntries.firstIndex(where: { $0.id == id }) else { return }
+        shoppingListEntries[index].isChecked.toggle()
+    }
     func setApproval(_ value: PantryProduct, householdMember: String) {
         var p = value
         if householdMember == "Martin" { p.martinApproved = true } else { p.annaApproved = true }
         p.approved = p.martinApproved && p.annaApproved
         update(p)
     }
-    private func save() { if let data = try? JSONEncoder().encode(products) { UserDefaults.standard.set(data, forKey: persistenceKey) } }
+    private func matchesCurrentFilters(_ product: PantryProduct) -> Bool {
+        (search.isEmpty || product.name.localizedCaseInsensitiveContains(search) || product.category.localizedCaseInsensitiveContains(search)) &&
+        (selectedStore == "All stores" || product.stores.contains(selectedStore)) &&
+        (selectedMarket.hasPrefix("Sweden") ? product.countries.contains("SE") : product.countries.contains("DE"))
+    }
+    private func save() {
+        guard canPersist else { return }
+        let state = PersistedState(products: products, shoppingListEntries: shoppingListEntries)
+        if let data = try? JSONEncoder().encode(state) { defaults.set(data, forKey: persistenceKey) }
+    }
+    private static func migrateLegacyData(_ data: Data) -> PersistedState? {
+        guard var legacyProducts = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else { return nil }
+        var entries: [ShoppingListEntry] = []
+        for index in legacyProducts.indices {
+            let legacy = legacyProducts[index]
+            if let productID = legacy["id"] as? String,
+               let quantity = legacy["listQuantity"] as? String {
+                let checked = legacy["checked"] as? Bool ?? false
+                entries.append(ShoppingListEntry(id: "legacy-\(productID)", productID: productID, quantity: quantity, isChecked: checked))
+            }
+            legacyProducts[index].removeValue(forKey: "listQuantity")
+            legacyProducts[index].removeValue(forKey: "checked")
+        }
+        guard let productsData = try? JSONSerialization.data(withJSONObject: legacyProducts),
+              let products = try? JSONDecoder().decode([PantryProduct].self, from: productsData) else { return nil }
+        return PersistedState(products: products, shoppingListEntries: entries)
+    }
 }
 
 @main
@@ -261,13 +345,20 @@ struct PantryRootView: View {
                 TextField("Search foods", text: $store.search).textFieldStyle(.roundedBorder).focused($searchFocused).accessibilityIdentifier("shopping.search")
                 if !isPhone { marketPicker }
             }.padding(.horizontal).padding(.vertical, 10)
+            if let warning = store.persistenceWarning {
+                Text(warning).font(.callout).foregroundStyle(.red).frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
+            }
             List {
-                let listItems = store.visibleProducts.filter { $0.listQuantity != nil }
+                let listItems = store.visibleShoppingItems
                 if listItems.isEmpty {
                     EmptyStateView(title: "Your list is empty", detail: "Add household-approved foods from the product library.")
                 } else {
-                    ForEach(store.categories.filter { category in listItems.contains(where: { $0.category == category }) }, id: \.self) { category in
-                        Section(category) { ForEach(listItems.filter { $0.category == category }) { product in productRow(product) } }
+                    ForEach(store.shoppingCategories, id: \.self) { category in
+                        Section(category) {
+                            ForEach(listItems.filter { $0.product.category == category }) { item in
+                                productRow(item.product, shoppingEntry: item.entry)
+                            }
+                        }
                     }
                 }
             }
@@ -319,15 +410,18 @@ struct PantryRootView: View {
     private var retailerOptions: [String] {
         store.selectedMarket.hasPrefix("Sweden") ? ["All stores", "ICA", "Coop", "Willys", "Lidl", "Other"] : ["All stores", "Aldi", "Edeka", "REWE", "Lidl", "Other"]
     }
-    @ViewBuilder private func productRow(_ product: PantryProduct) -> some View {
+    @ViewBuilder private func productRow(_ product: PantryProduct, shoppingEntry: ShoppingListEntry? = nil) -> some View {
         #if os(macOS)
         HStack(spacing: 10) {
-            Button { store.toggle(product) } label: { PantryCheck(checked: product.checked) }.buttonStyle(.plain).accessibilityLabel(product.checked ? "Mark \(product.name) not bought" : "Mark \(product.name) bought")
+            if let shoppingEntry {
+                Button { store.toggleShoppingListItem(shoppingEntry.id) } label: { PantryCheck(checked: shoppingEntry.isChecked) }.buttonStyle(.plain).accessibilityLabel(shoppingEntry.isChecked ? "Mark \(product.name) not bought" : "Mark \(product.name) bought")
+            }
             VStack(alignment: .leading, spacing: 3) {
-                Text(product.name).strikethrough(product.checked).foregroundStyle(product.checked ? .secondary : .primary)
+                Text(product.name).strikethrough(shoppingEntry?.isChecked == true).foregroundStyle(shoppingEntry?.isChecked == true ? .secondary : .primary)
                 Text(product.approved ? "Household approved" : "Suggested · review together").font(.caption).foregroundStyle(.secondary)
             }
             Spacer(minLength: 8)
+            if let shoppingEntry { Text(shoppingEntry.quantity).font(.caption).foregroundStyle(.secondary) }
             if product.maximumPrice != nil { Text(priceRange(product)).font(.caption).foregroundStyle(.secondary) }
         }
         .contentShape(Rectangle()).onTapGesture { selection = product.id }
@@ -335,11 +429,19 @@ struct PantryRootView: View {
         #else
             NavigationLink(value: product.id) {
             HStack(spacing: 12) {
-                Button { store.toggle(product) } label: { PantryCheck(checked: product.checked) }.buttonStyle(.plain).accessibilityLabel("Toggle \(product.name)")
-                VStack(alignment: .leading, spacing: 3) { Text(product.name).strikethrough(product.checked); Text(product.approved ? "Approved" : "Suggested · review together").font(.caption).foregroundStyle(.secondary) }
+                if let shoppingEntry {
+                    Button { store.toggleShoppingListItem(shoppingEntry.id) } label: { PantryCheck(checked: shoppingEntry.isChecked) }.buttonStyle(.plain).accessibilityLabel("Toggle \(product.name)")
+                }
+                VStack(alignment: .leading, spacing: 3) { Text(product.name).strikethrough(shoppingEntry?.isChecked == true); Text(shoppingEntry?.quantity ?? (product.approved ? "Approved" : "Suggested · review together")).font(.caption).foregroundStyle(.secondary) }
             }
         }
-        .swipeActions(edge: .trailing) { Button(product.listQuantity == nil ? "Add" : "Remove") { var p = product; p.listQuantity = p.listQuantity == nil ? "1" : nil; store.update(p) }.tint(PantryStyle.green) }
+        .swipeActions(edge: .trailing) {
+            if let shoppingEntry {
+                Button("Remove") { store.removeShoppingListItem(shoppingEntry.id) }.tint(PantryStyle.green)
+            } else if product.approved && store.shoppingListEntry(for: product.id) == nil {
+                Button("Add") { store.addToShoppingList(productID: product.id) }.tint(PantryStyle.green)
+            }
+        }
         #endif
     }
     private var currency: String { store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR" }
@@ -377,8 +479,8 @@ struct ProductDetailView: View {
                             Button("Edit details") { editing = true }.buttonStyle(.bordered)
                             if !p.martinApproved { Button("Martin approves") { store.setApproval(p, householdMember: "Martin") }.buttonStyle(.bordered).accessibilityIdentifier("product.approve.martin") }
                             if !p.annaApproved { Button("Anna approves") { store.setApproval(p, householdMember: "Anna") }.buttonStyle(.bordered).accessibilityIdentifier("product.approve.anna") }
-                            if p.approved && p.listQuantity == nil {
-                                Button("Add to shopping list") { var updated = p; updated.listQuantity = "1"; store.update(updated) }.buttonStyle(.borderedProminent).tint(PantryStyle.green).accessibilityIdentifier("product.addToList")
+                            if p.approved && store.shoppingListEntry(for: p.id) == nil {
+                                Button("Add to shopping list") { store.addToShoppingList(productID: p.id) }.buttonStyle(.borderedProminent).tint(PantryStyle.green).accessibilityIdentifier("product.addToList")
                             }
                         }
                     }.frame(maxWidth: 600, alignment: .leading).padding(24).frame(maxWidth: .infinity)
@@ -464,7 +566,7 @@ struct ProductEditorSheet: View {
             p.approved = false; p.martinApproved = false; p.annaApproved = false
             store.update(p)
         } else {
-            store.add(PantryProduct(id: UUID().uuidString, name: name, category: category, suggestedProduct: exactProduct.isEmpty ? nil : exactProduct, packageSize: packageSize.isEmpty ? nil : packageSize, ingredientsCriteria: criteria, selectionGuide: tips, countries: [store.selectedMarket.hasPrefix("Sweden") ? "SE" : "DE"], approved: false, stores: [storeChoice], minimumPrice: minVal, maximumPrice: maxVal, priceCurrency: store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR", listQuantity: nil, imageData: photoData))
+            store.add(PantryProduct(id: UUID().uuidString, name: name, category: category, suggestedProduct: exactProduct.isEmpty ? nil : exactProduct, packageSize: packageSize.isEmpty ? nil : packageSize, ingredientsCriteria: criteria, selectionGuide: tips, countries: [store.selectedMarket.hasPrefix("Sweden") ? "SE" : "DE"], approved: false, stores: [storeChoice], minimumPrice: minVal, maximumPrice: maxVal, priceCurrency: store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR", imageData: photoData))
         }
         dismiss()
     }
