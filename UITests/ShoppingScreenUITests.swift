@@ -6,9 +6,9 @@ final class ShoppingScreenUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        XCTAssertTrue(app.otherElements["shopping.list"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shopping.list"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["shopping.addItem"].exists)
-        XCTAssertTrue(app.buttons["shopping.storeFilter"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["shopping.storeFilter"].exists)
     }
 
     func testAProductNeedsBothHouseholdApprovalsBeforeItCanBeListed() {
@@ -18,7 +18,7 @@ final class ShoppingScreenUITests: XCTestCase {
         let library = app.buttons["Product library"]
         XCTAssertTrue(library.waitForExistence(timeout: 10))
         library.click()
-        XCTAssertTrue(app.otherElements["library.list"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["library.list"].waitForExistence(timeout: 10))
 
         app.staticTexts["Green lentils, dried"].click()
         XCTAssertTrue(app.buttons["product.approve.martin"].waitForExistence(timeout: 5))
