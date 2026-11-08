@@ -78,7 +78,7 @@ struct PantryProduct: Codable, Identifiable, Hashable {
     enum CodingKeys: String, CodingKey { case id, name, category, suggestedProduct, packageSize, ingredientsCriteria, selectionGuide, countries, approved, martinApproved, annaApproved, stores, minimumPrice, maximumPrice, priceCurrency, imageData }
     init(id: String, name: String, category: String, suggestedProduct: String?, packageSize: String?, ingredientsCriteria: String, selectionGuide: String, countries: [String], approved: Bool, martinApproved: Bool = false, annaApproved: Bool = false, stores: [String], minimumPrice: Double?, maximumPrice: Double?, priceCurrency: String? = nil, imageData: Data? = nil) {
         self.id = id; self.name = name; self.category = category; self.suggestedProduct = suggestedProduct; self.packageSize = packageSize
-        self.ingredientsCriteria = ingredientsCriteria; self.selectionGuide = selectionGuide; self.countries = countries; self.approved = approved; self.martinApproved = martinApproved; self.annaApproved = annaApproved
+        self.ingredientsCriteria = ingredientsCriteria; self.selectionGuide = selectionGuide; self.countries = countries; self.approved = martinApproved && annaApproved; self.martinApproved = martinApproved; self.annaApproved = annaApproved
         self.stores = stores; self.minimumPrice = minimumPrice; self.maximumPrice = maximumPrice; self.priceCurrency = priceCurrency; self.imageData = imageData
     }
     init(from decoder: Decoder) throws {
@@ -183,7 +183,8 @@ final class PantryStore: ObservableObject {
     var categories: [String] { Array(Set(visibleProducts.map(\.category))).sorted() }
     var visibleShoppingItems: [ListedPantryProduct] {
         shoppingListEntries.compactMap { entry in
-            guard let product = product(entry.productID), matchesCurrentFilters(product) else { return nil }
+            guard let product = product(entry.productID), product.martinApproved, product.annaApproved,
+                  matchesCurrentFilters(product) else { return nil }
             return ListedPantryProduct(entry: entry, product: product)
         }
     }
@@ -191,8 +192,10 @@ final class PantryStore: ObservableObject {
     func product(_ id: String) -> PantryProduct? { products.first { $0.id == id } }
     func update(_ value: PantryProduct) {
         guard canPersist, let i = products.firstIndex(where: { $0.id == value.id }) else { return }
-        products[i] = value
-        if !value.approved { shoppingListEntries.removeAll { $0.productID == value.id } }
+        var normalized = value
+        normalized.approved = normalized.martinApproved && normalized.annaApproved
+        products[i] = normalized
+        if !normalized.approved { shoppingListEntries.removeAll { $0.productID == value.id } }
     }
     func add(_ value: PantryProduct) { guard canPersist else { return }; products.insert(value, at: 0) }
     func shoppingListEntry(for productID: String) -> ShoppingListEntry? { shoppingListEntries.first { $0.productID == productID } }
@@ -205,7 +208,9 @@ final class PantryStore: ObservableObject {
     }
     func removeShoppingListItem(_ id: String) { guard canPersist else { return }; shoppingListEntries.removeAll { $0.id == id } }
     func toggleShoppingListItem(_ id: String) {
-        guard canPersist, let index = shoppingListEntries.firstIndex(where: { $0.id == id }) else { return }
+        guard canPersist, let entry = shoppingListEntries.first(where: { $0.id == id }),
+              let product = product(entry.productID), product.martinApproved, product.annaApproved,
+              let index = shoppingListEntries.firstIndex(where: { $0.id == id }) else { return }
         shoppingListEntries[index].isChecked.toggle()
     }
     func setApproval(_ value: PantryProduct, householdMember: String) {
@@ -252,7 +257,10 @@ struct AMSNutritionCompanionApp: App {
         let arguments = ProcessInfo.processInfo.arguments
         if arguments.contains("--ams-ui-testing") {
             let suiteName = ProcessInfo.processInfo.environment["AMS_PANTRY_TEST_SUITE"] ?? "ams.ui-tests.\(UUID().uuidString)"
-            _store = StateObject(wrappedValue: PantryStore(defaults: UserDefaults(suiteName: suiteName) ?? UserDefaults()))
+            guard let isolatedDefaults = UserDefaults(suiteName: suiteName) else {
+                fatalError("Unable to create isolated UI-test settings; refusing to use regular app settings.")
+            }
+            _store = StateObject(wrappedValue: PantryStore(defaults: isolatedDefaults))
         } else {
             _store = StateObject(wrappedValue: PantryStore())
         }
@@ -266,7 +274,10 @@ struct AMSNutritionCompanionApp: App {
             #endif
         }
             .commands {
-                CommandGroup(replacing: .newItem) { Button("Add Shopping Item…") { NotificationCenter.default.post(name: .addPantryItem, object: nil) }.keyboardShortcut("n", modifiers: .command) }
+                #if os(macOS)
+                SidebarCommands()
+                #endif
+                CommandGroup(replacing: .newItem) { Button("Propose Food…") { NotificationCenter.default.post(name: .addPantryItem, object: nil) }.keyboardShortcut("n", modifiers: .command) }
                 CommandGroup(after: .saveItem) { Button("Search Products") { NotificationCenter.default.post(name: .focusPantrySearch, object: nil) }.keyboardShortcut("f", modifiers: .command) }
             }
     }
@@ -306,6 +317,7 @@ struct PantryRootView: View {
                 sidebar
             } content: {
                 sectionContent
+                    .navigationDestination(for: String.self) { id in ProductDetailView(productID: id) }
             } detail: {
                 detailPane
             }
@@ -354,7 +366,9 @@ struct PantryRootView: View {
             Menu {
                 Picker("Market", selection: $store.selectedMarket) { ForEach(["Sweden · SEK", "Germany · EUR"], id: \.self) { Text($0) } }
                 Picker("Store", selection: $store.selectedStore) { ForEach(retailerOptions, id: \.self) { Text($0) } }
-            } label: { Text(store.selectedStore == "All stores" ? store.selectedMarket : store.selectedStore) }.accessibilityIdentifier("shopping.storeFilter")
+            } label: { Text("\(store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR") · \(store.selectedStore)") }
+                .accessibilityLabel("\(store.selectedMarket), \(store.selectedStore)")
+                .accessibilityIdentifier("shopping.storeFilter")
         }
         }
         #if os(macOS)
@@ -512,13 +526,9 @@ struct ProductDetailView: View {
                         detailSection("What to look for", p.selectionGuide)
                         detailSection("Ingredients and processing", p.ingredientsCriteria)
                         detailSection("Store and price", storeSummary(p))
-                        HStack {
-                            Button("Edit details") { editing = true }.buttonStyle(.bordered).disabled(store.isReadOnly)
-                            if !p.martinApproved { Button("Martin approves") { store.setApproval(p, householdMember: "Martin") }.buttonStyle(.bordered).disabled(store.isReadOnly).accessibilityIdentifier("product.approve.martin") }
-                            if !p.annaApproved { Button("Anna approves") { store.setApproval(p, householdMember: "Anna") }.buttonStyle(.bordered).disabled(store.isReadOnly).accessibilityIdentifier("product.approve.anna") }
-                            if p.approved && store.shoppingListEntry(for: p.id) == nil {
-                                Button("Add to shopping list") { store.addToShoppingList(productID: p.id) }.buttonStyle(.borderedProminent).tint(PantryStyle.green).disabled(store.isReadOnly).accessibilityIdentifier("product.addToList")
-                            }
+                        ViewThatFits(in: .horizontal) {
+                            HStack { actionButtons(for: p) }
+                            VStack(alignment: .leading) { actionButtons(for: p) }
                         }
                     }.frame(maxWidth: 600, alignment: .leading).padding(24).frame(maxWidth: .infinity)
                 }
@@ -528,6 +538,14 @@ struct ProductDetailView: View {
                 #endif
                 .sheet(isPresented: $editing) { ProductEditorSheet(product: p).environmentObject(store) }
             } else { EmptyStateView(title: "Food not found", detail: "Return to the product library and choose another food.") }
+        }
+    }
+    @ViewBuilder private func actionButtons(for p: PantryProduct) -> some View {
+        Button("Edit details") { editing = true }.buttonStyle(.bordered).disabled(store.isReadOnly)
+        if !p.martinApproved { Button("Martin approves") { store.setApproval(p, householdMember: "Martin") }.buttonStyle(.bordered).disabled(store.isReadOnly).accessibilityIdentifier("product.approve.martin") }
+        if !p.annaApproved { Button("Anna approves") { store.setApproval(p, householdMember: "Anna") }.buttonStyle(.bordered).disabled(store.isReadOnly).accessibilityIdentifier("product.approve.anna") }
+        if p.approved && store.shoppingListEntry(for: p.id) == nil {
+            Button("Add to shopping list") { store.addToShoppingList(productID: p.id) }.buttonStyle(.borderedProminent).tint(PantryStyle.green).disabled(store.isReadOnly).accessibilityIdentifier("product.addToList")
         }
     }
     private func detailSection(_ title: String, _ text: String) -> some View { VStack(alignment: .leading, spacing: 6) { Text(title).font(.headline); Text(text).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) } }
