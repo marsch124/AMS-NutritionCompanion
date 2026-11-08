@@ -1,33 +1,35 @@
 # How it works
 
-**Status:** Version 0.1.0. Mac app built and launched locally. iPhone/iPad runs and automated UI assertions remain unverified. Shared sync remains planned.
+**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub CI builds the iOS target and passes the Mac unit and UI tests. The Mac app has been built and launched locally. iPhone/iPad runtime review and household sync are still outstanding.
 
-## Open and browse foods
+## Product catalog and shopping list
 
-On first load, the prototype reads saved product data from local UserDefaults, or loads the 100 proposed records from Resources/SeedProducts.json if nothing is saved. On subsequent edits it saves the encoded product array back to UserDefaults. This is device-local persistence for offline use; it does not share data with Anna or another device.
+The catalog stores food identity, household approval, selection guidance, store and price notes, and package-photo data. Shopping-list entries are separate records that refer to a catalog product and keep their own quantity and bought state. Adding, checking off, or removing a list entry does not change the catalog product.
 
-Browse the separate Product library and search by food name or category. The shopping list starts empty; open a candidate and, after both local Martin and Anna approval flags are set, add it to the list. Choose Sweden/SEK or Germany/EUR and optionally ICA, Coop, Willys, Lidl, or Other. Proposed seed products have no store assignments, so filtering to one retailer can hide those products until a store is added.
+Only products with both local Martin and Anna approval flags can be added. The store enforces that rule for the product detail button and the iPhone swipe action. The approval buttons are local flags; the app does not verify who pressed them.
 
-## Shopping list and product details
+On a new install, the app loads the 100 proposed records from Resources/SeedProducts.json. Changes are saved on the device in UserDefaults using one versioned state record. The list is available offline on that device; it is not shared with Anna.
 
-The app includes check-off controls and lets an iPhone shopper add or remove an item from the list with a swipe action. Product detail shows category, approval state, selection guidance, ingredient/processing criteria, store, and numeric price limits if present. Mac supports a three-column split view. These flows have been observed on Mac but have not passed automated UI tests.
+## Existing saved data
 
-Two separate approval actions store Martin's and Anna's local approval flags. Both must be set before an item can be added to the list. The app does not authenticate the person operating either action.
+The previous prototype saved a product array under `ams.pantry.products.v1`, with list quantity and bought status mixed into product records. On launch, the app migrates that array to `ams.pantry.state.v2`: product details stay in the catalog, while each existing list item becomes its own entry with its quantity and bought status. Migrated list entry identifiers are derived from the old product identifiers, so retrying migration does not create duplicate rows. The old saved copy is left in place.
 
-## Edit a product and photo
+If saved data cannot be read, the app shows a warning and does not replace it with seed data. The data and migration tests use a dedicated temporary UserDefaults suite; they do not use the normal app settings store.
 
-Add or edit a food name, exact brand/product, package size/unit, category, selection tip, ingredient/processing note, one store, minimum/maximum numeric price values, and package photo. Choose a photo from the device photo library; the image bytes are stored with the local product record. Direct camera capture, branch detail, price observations/history, and separate per-market/store ranges are not implemented.
+## Browse and shop
 
-The prototype stores one price range and its currency per product. If viewed under a different market currency, it identifies the saved currency and does not convert the value. Package/unit basis and separate limits per market/store are still missing.
+Browse Product library and search by food name or category. The shopping list starts empty unless existing saved data is migrated. Choose Sweden/SEK or Germany/EUR and optionally ICA, Coop, Willys, Lidl, or Other. Proposed seed products have no store assignments, so filtering to one retailer can hide them until a store is added.
+
+Product details show category, approval state, selection guidance, ingredient/processing criteria, store, and numeric price limits if present. The editor accepts an exact brand/product, package size/unit, category, selection tips, ingredient/processing notes, one store, a minimum/maximum price, and a package photo selected from the photo library. Direct camera capture, branch detail, price observations/history, and separate per-market/store ranges are not implemented.
+
+The prototype stores one price range and its currency per product. If viewed under another market currency, it identifies the saved currency and does not convert the value. Package/unit basis and separate limits per market/store are still missing.
 
 ## Read label terms
 
 Open the static English label guide to see Swedish and German terms for energy, fat, saturated fat, carbohydrates, sugars, fibre, protein, and salt, plus brief ingredient-list guidance. It does not scan or interpret a package and does not include personalized nutrition thresholds, automated comparisons, or a health score.
 
-## What happens when offline
+## Verification and remaining work
 
-Edits persist locally through UserDefaults, so the same app installation can reload saved product data offline. There is no sync queue, CloudKit operation, family invitation, conflict resolution, or cross-device backup.
+GitHub Actions passed the iOS target build, three isolated data/persistence tests, and two Mac UI tests on 8 November 2026. The UI tests exercise stable accessibility identifiers, joint approval, and adding an approved product to the list. The Mac app has been built and launched locally. iOS/iPad simulator and device behavior, full day/night screenshots, reviewer sign-off, iCloud sync, and release have not been verified.
 
-## Before relying on the app
-
-The Mac target builds and runs locally. iOS/iPad simulator/device runs, exhaustive day/night screen pictures, reviewer sign-off, UI automation, and release are not verified. The public repository is https://github.com/marsch124/AMS-NutritionCompanion; its CI workflow reached the iOS build and exposed a toolbar-builder compile error that is being fixed. The 100 candidates are unapproved suggestions; stores and prices need household entry. Use synthetic disposable data until sync, backups, and privacy behavior are implemented and tested. Personal Reminders and vault data are not used by this app.
+The public repository is https://github.com/marsch124/AMS-NutritionCompanion. Use synthetic data during development. Personal Reminders and vault data are not used by this app.

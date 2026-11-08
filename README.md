@@ -6,9 +6,9 @@ A SwiftUI prototype, version 0.1.0, for Martin and Anna to browse a proposed hou
 
 The Xcode project declares iOS and macOS app targets. Source code provides a three-column Mac layout, iPhone navigation, regular-width iPad split-view layout, search and market/store filters, product details and editing, photo-library package images, local price fields, separate Martin/Anna approval markers, and an English label guide with Swedish and German terms. Resources/SeedProducts.json contains 100 proposed candidates; they are not yet jointly approved, photographed, store-verified, or priced.
 
-Product changes are encoded into UserDefaults on the device running the app. This gives the prototype local persistence and offline access on that device. It does not sync Martin’s data to Anna or to another device.
+Catalog products and shopping-list entries are stored separately in one versioned UserDefaults value on the device running the app. List quantity and bought status belong to list entries, so shopping does not change the approved catalog record. Existing product-array data is migrated while preserving its list quantity and bought status; the original saved value is kept. Unreadable saved data is left untouched and shown with a warning instead of being replaced by seed data. The app supports local offline use but does not sync Martin’s data to Anna or another device.
 
-The Mac target was built and launched locally in Xcode. iPhone/iPad builds and runtime behavior have not been verified. Mac UI tests were blocked because XCTest could not enable automation mode, so no UI assertions ran. Complete screenshots, accessibility review, and publishing have not been verified.
+The Mac target was built and launched locally in Xcode. GitHub Actions passes the iOS target build, three isolated data/persistence tests, and two Mac UI tests. iPhone/iPad runtime behavior, complete screenshots, accessibility review, and publishing have not been verified.
 
 ## Important limits
 
@@ -39,4 +39,4 @@ The Mac target was built and launched locally in Xcode. iPhone/iPad builds and r
 
 Open AMSNutritionCompanion.xcodeproj in Xcode to inspect the declared targets and schemes. The public GitHub repository is https://github.com/marsch124/AMS-NutritionCompanion and GitHub Actions configuration is in .github/workflows/ci.yml. Configure the Apple Developer team and CloudKit container before implementing shared sync. Treat prototype data as disposable; use synthetic data and a separate test Apple account. Do not connect personal Reminders or a notes vault; they are outside this app’s scope.
 
-No release has been published. Complete day/night screen captures, reviewer sign-off, iOS/iPad runtime checks, a passing GitHub Actions run, and publishing remain pending. The first public Actions run reached the iOS build and exposed a toolbar-builder compile error; the fix is being verified.
+No release has been published. Complete day/night screen captures, reviewer sign-off, iOS/iPad runtime checks, iCloud sharing, and publishing remain pending. GitHub Actions is configured for each push and pull request.

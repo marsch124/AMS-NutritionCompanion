@@ -1,6 +1,6 @@
 # Product specification
 
-**Status:** Version 0.1.0. The Mac app has built and run locally; the iPhone/iPad build, UI tests, iCloud sync, screenshots, and publication are not verified. This document separates current behavior from the intended household product.
+**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub CI passes the iOS build, three isolated data/persistence tests, and two Mac UI tests. The Mac app has built and run locally. iPhone/iPad runtime review, iCloud sync, complete screenshots, and publication remain outstanding. This document separates current behavior from the intended household product.
 
 ## Purpose
 
@@ -17,14 +17,16 @@ Help Martin shop accurately for the household with Anna. The intended app should
 ## Present in the prototype source
 
 - SwiftUI app targets are declared for iOS and macOS. macOS uses a three-column NavigationSplitView; iPhone uses a NavigationStack; regular-width iPad source uses a three-column NavigationSplitView.
-- A categorized food list, search, completion toggles, an add-to-list swipe action on iOS, and market/store filters are defined.
+- A categorized product library and shopping list, search, market/store filters, and a shopping-list check-off control are defined. Shopping-list entries are separate from catalog products and store their own product reference, quantity, and bought state.
+- Adding, checking off, or removing a shopping-list entry does not modify the catalog product. Both local household approval flags are required by the data store before an item can be added, including through the iPhone swipe action.
 - Product detail presents selection tips, ingredient/processing criteria, store and price text, and separate local approval flags for Martin and Anna. A candidate is marked approved only after both flags are set; this does not authenticate who tapped either control.
 - Product add/edit fields include name, category, exact brand/product, package size/unit, selection tip, ingredient/processing criteria, one store, numeric minimum/maximum prices, and a photo-library selection.
 - An English static label guide includes common nutrition terms in Swedish and German.
 - Resources/SeedProducts.json contains 100 proposed candidate records. Seeded records are marked unapproved, have empty store assignments, and have no prefilled price limits.
-- Product data and selected package-photo bytes are saved locally via UserDefaults, so the prototype has a local persistence path and is designed to load saved data offline on that device.
+- Product data, shopping-list entries, and selected package-photo bytes are saved together as one versioned state value in UserDefaults. On launch, legacy product-array data is migrated while preserving list quantity and bought status; stable migrated entry IDs avoid duplicate entries on retries, and the old saved value remains in place.
+- Unreadable saved data is left untouched and a warning is shown instead of silently loading seed data over it. Persistence tests use a separate temporary UserDefaults suite.
 
-The points above describe source code and local Mac observation. The iPhone/iPad build/run, automated UI assertions, full screen review, screenshot set, and accessibility verification remain unconfirmed.
+The points above describe source code and local Mac observation plus the passing GitHub CI run on 8 November 2026. iOS/iPad simulator/device runtime behavior, full screen review, day/night screenshot set, and accessibility sign-off remain unconfirmed.
 
 ## Current prototype limits
 
@@ -35,7 +37,7 @@ The points above describe source code and local Mac observation. The iPhone/iPad
 - **Photo capture:** A photo can be selected from the photo library. Direct in-app camera capture is not implemented.
 - **Label help:** The guide is static English text. There is no barcode scan, OCR, label parsing, nutritional calculation, or editable household threshold system.
 - No live retailer availability, product images, exact brands, or prices are supplied by the catalog.
-- iPhone/iPad builds and runs, simulator screenshots, day/night screen inventory review, and release/publishing have not been verified. The local Mac app has been built and launched.
+- The iOS target build and Mac UI automation pass on GitHub Actions. iPhone/iPad simulator and device runs, day/night screen inventory review, and release/publishing have not been verified. The local Mac app has been built and launched.
 
 ## Intended core experience
 
