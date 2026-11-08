@@ -13,7 +13,9 @@
 - Added isolated tests for approval enforcement, list lifecycle, legacy migration, and preserving unreadable saved data. Tests use their own temporary UserDefaults suite.
 - Changed the Mac/iPad sidebar to a native selectable list with a visible current section. The Label guide is now a normal in-app destination; iPhone navigation uses a Browse menu.
 - Moved Mac search into the toolbar and removed the duplicate market/store selector from the list pane.
-- Market changes reset a store selection that is not offered in the new country. A regression UI test verifies Sweden/ICA changes to Germany/All stores. GitHub Actions run 42511878437 passed the iOS build, eight isolated persistence/store tests, one smoke test, and five Mac UI tests.
+- Market changes reset a store selection that is not offered in the new country. A regression UI test verifies Sweden/ICA changes to Germany/All stores.
+- Product edits and additions now encode a candidate state before publishing it, so failed saves cannot leave unsaved product values in memory. The editor also shows the storage warning when persistence has failed.
+- CI run 42511878437 passed the iOS build, eight isolated persistence/store tests, one smoke test, and five Mac UI tests. The new rollback regression is currently being verified.
 
 ## Existing prototype — Version 0.1.0
 

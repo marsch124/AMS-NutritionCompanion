@@ -14,7 +14,7 @@ On a new install, the app loads the 100 proposed records from Resources/SeedProd
 
 The previous prototype saved a product array under `ams.pantry.products.v1`, with list quantity and bought status mixed into product records. On launch, the app migrates that array to `ams.pantry.state.v2`: product details stay in the catalog, while each existing list item becomes its own entry with its quantity and bought status. Migrated list entry identifiers are derived from the old product identifiers, so retrying migration does not create duplicate rows. The old saved copy is left in place.
 
-If saved data cannot be read, the app shows a warning, leaves it untouched, and blocks edits so they are not silently discarded. Unit tests use a dedicated temporary UserDefaults suite. Each UI test launches with a new named suite through the `--ams-ui-testing` launch argument; UI tests do not open or mutate the normal app settings store. Tests do not access Reminders or a notes vault.
+If saved data cannot be read, the app shows a warning, leaves it untouched, and blocks edits so they are not silently discarded. Product additions and edits are encoded as a candidate state before they become visible; a failed encoding leaves the existing in-memory product unchanged and the editor shows the persistence warning. Unit tests use a dedicated temporary UserDefaults suite. Each UI test launches with a new named suite through the `--ams-ui-testing` launch argument; UI tests do not open or mutate the normal app settings store. Tests do not access Reminders or a notes vault.
 
 ## Browse and shop
 

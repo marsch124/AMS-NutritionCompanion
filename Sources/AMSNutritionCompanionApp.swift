@@ -118,8 +118,8 @@ struct ListedPantryProduct: Identifiable {
 
 @MainActor
 final class PantryStore: ObservableObject {
-    @Published var products: [PantryProduct] { didSet { save() } }
-    @Published private(set) var shoppingListEntries: [ShoppingListEntry] { didSet { save() } }
+    @Published var products: [PantryProduct] { didSet { if !suppressSave { save() } } }
+    @Published private(set) var shoppingListEntries: [ShoppingListEntry] { didSet { if !suppressSave { save() } } }
     @Published private(set) var persistenceWarning: String?
     @Published var selectedMarket = "Sweden · SEK"
     @Published var selectedStore = "All stores"
@@ -129,6 +129,7 @@ final class PantryStore: ObservableObject {
     private let legacyPersistenceKey = "ams.pantry.products.v1"
     private let defaults: UserDefaults
     private var canPersist = true
+    private var suppressSave = false
 
     private struct PersistedState: Codable {
         var products: [PantryProduct]
@@ -202,17 +203,19 @@ final class PantryStore: ObservableObject {
         guard canPersist, let i = products.firstIndex(where: { $0.id == value.id }) else { return false }
         var normalized = value
         normalized.approved = normalized.martinApproved && normalized.annaApproved
-        products[i] = normalized
-        if !normalized.approved { shoppingListEntries.removeAll { $0.productID == value.id } }
-        return canPersist
+        var candidateProducts = products
+        candidateProducts[i] = normalized
+        let candidateEntries = normalized.approved ? shoppingListEntries : shoppingListEntries.filter { $0.productID != value.id }
+        return commit(candidateProducts, candidateEntries)
     }
     @discardableResult
     func add(_ value: PantryProduct) -> Bool {
         guard canPersist else { return false }
         var normalized = value
         normalized.approved = normalized.martinApproved && normalized.annaApproved
-        products.insert(normalized, at: 0)
-        return canPersist
+        var candidateProducts = products
+        candidateProducts.insert(normalized, at: 0)
+        return commit(candidateProducts, shoppingListEntries)
     }
     func shoppingListEntry(for productID: String) -> ShoppingListEntry? { shoppingListEntries.first { $0.productID == productID } }
     @discardableResult
@@ -250,6 +253,23 @@ final class PantryStore: ObservableObject {
         } catch {
             canPersist = false
             persistenceWarning = "A change could not be saved. Editing is paused, and the last saved copy has been left untouched."
+        }
+    }
+    private func commit(_ candidateProducts: [PantryProduct], _ candidateEntries: [ShoppingListEntry]) -> Bool {
+        guard canPersist else { return false }
+        do {
+            let state = PersistedState(products: candidateProducts, shoppingListEntries: candidateEntries)
+            let data = try JSONEncoder().encode(state)
+            defaults.set(data, forKey: persistenceKey)
+            suppressSave = true
+            products = candidateProducts
+            shoppingListEntries = candidateEntries
+            suppressSave = false
+            return true
+        } catch {
+            canPersist = false
+            persistenceWarning = "A change could not be saved. Editing is paused, and the last saved copy has been left untouched."
+            return false
         }
     }
     private static func migrateLegacyData(_ data: Data) -> PersistedState? {
@@ -606,6 +626,12 @@ struct ProductEditorSheet: View {
     var body: some View {
         NavigationStack {
             Form {
+                if let warning = store.persistenceWarning {
+                    Section {
+                        Text(warning).font(.callout).foregroundStyle(.red)
+                            .accessibilityIdentifier("product.edit.persistenceError")
+                    }
+                }
                 Section("Food") {
                     TextField("Product or food name", text: $name).accessibilityIdentifier("product.edit.name")
                     TextField("Exact brand / product", text: $exactProduct)
