@@ -2,9 +2,16 @@ import XCTest
 
 @MainActor
 final class ShoppingScreenUITests: XCTestCase {
-    func testLabelGuideCanBeOpenedAsAnInAppDestination() {
+    private func launchApp() -> XCUIApplication {
         let app = XCUIApplication()
+        app.launchArguments.append("--ams-ui-testing")
+        app.launchEnvironment["AMS_PANTRY_TEST_SUITE"] = "ams.ui.tests.\(UUID().uuidString)"
         app.launch()
+        return app
+    }
+
+    func testLabelGuideCanBeOpenedAsAnInAppDestination() {
+        let app = launchApp()
 
         let guideNavigation = app.descendants(matching: .any)["sidebar.labelGuide"]
         XCTAssertTrue(guideNavigation.waitForExistence(timeout: 10))
@@ -14,8 +21,7 @@ final class ShoppingScreenUITests: XCTestCase {
     }
 
     func testShoppingScreenExposesStableListAddAndStoreFilterIdentifiers() {
-        let app = XCUIApplication()
-        app.launch()
+        let app = launchApp()
 
         XCTAssertTrue(app.descendants(matching: .any)["shopping.list"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["shopping.addItem"].exists)
@@ -23,8 +29,7 @@ final class ShoppingScreenUITests: XCTestCase {
     }
 
     func testAProductNeedsBothHouseholdApprovalsBeforeItCanBeListed() {
-        let app = XCUIApplication()
-        app.launch()
+        let app = launchApp()
 
         let library = app.descendants(matching: .any)["sidebar.productLibrary"]
         XCTAssertTrue(library.waitForExistence(timeout: 10))

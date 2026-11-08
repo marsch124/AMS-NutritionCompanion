@@ -8,7 +8,7 @@ The Xcode project declares iOS and macOS app targets. Source code provides a thr
 
 Catalog products and shopping-list entries are stored separately in one versioned UserDefaults value on the device running the app. List quantity and bought status belong to list entries, so shopping does not change the approved catalog record. Existing product-array data is migrated while preserving its list quantity and bought status; the original saved value is kept. Unreadable saved data is left untouched and shown with a warning instead of being replaced by seed data. The app supports local offline use but does not sync Martin’s data to Anna or another device.
 
-The Mac target was built and launched locally in Xcode. GitHub Actions passes the iOS target build, three isolated data/persistence tests, and three Mac UI tests. iPhone/iPad runtime behavior, complete screenshots, accessibility review, and publishing have not been verified.
+The Mac target was built and launched locally in Xcode. The previous GitHub Actions run passed the iOS target build, three isolated data/persistence tests, and three Mac UI tests. Newer data-safety and approval changes are awaiting CI. iPhone/iPad runtime behavior, complete screenshots, accessibility review, and publishing have not been verified.
 
 ## Important limits
 

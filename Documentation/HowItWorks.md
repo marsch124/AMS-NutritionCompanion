@@ -1,6 +1,6 @@
 # How it works
 
-**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub CI builds the iOS target and passes the Mac unit and UI tests. The Mac app has been built and launched locally. iPhone/iPad runtime review and household sync are still outstanding.
+**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub CI passed the prior revision; the latest safety and approval changes await a fresh CI run. The Mac app has been built and launched locally. iPhone/iPad runtime review and household sync are still outstanding.
 
 ## Product catalog and shopping list
 
@@ -14,7 +14,7 @@ On a new install, the app loads the 100 proposed records from Resources/SeedProd
 
 The previous prototype saved a product array under `ams.pantry.products.v1`, with list quantity and bought status mixed into product records. On launch, the app migrates that array to `ams.pantry.state.v2`: product details stay in the catalog, while each existing list item becomes its own entry with its quantity and bought status. Migrated list entry identifiers are derived from the old product identifiers, so retrying migration does not create duplicate rows. The old saved copy is left in place.
 
-If saved data cannot be read, the app shows a warning and does not replace it with seed data. The data and migration tests use a dedicated temporary UserDefaults suite; they do not use the normal app settings store.
+If saved data cannot be read, the app shows a warning, leaves it untouched, and blocks edits so they are not silently discarded. Unit tests use a dedicated temporary UserDefaults suite. Each UI test launches with a new named suite through the `--ams-ui-testing` launch argument; UI tests do not open or mutate the normal app settings store. Tests do not access Reminders or a notes vault.
 
 ## Browse and shop
 
@@ -30,6 +30,6 @@ Open the static English label guide to see Swedish and German terms for energy, 
 
 ## Verification and remaining work
 
-GitHub Actions passed the iOS target build, three isolated data/persistence tests, and three Mac UI tests on 8 November 2026. The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, and opening the Label guide as an in-app destination. The Mac app has been built and launched locally. iOS/iPad simulator and device behavior, full day/night screenshots, reviewer sign-off, iCloud sync, and release have not been verified.
+GitHub Actions passed the iOS target build, three isolated data/persistence tests, and three Mac UI tests on 8 November 2026 before the latest safety and store-rule changes. The current uncommitted changes add three unit regressions and isolate each UI-test launch. Mac UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, and opening the Label guide as an in-app destination. The local test build currently cannot start because this machine's sandbox blocks Xcode's SwiftUI macro service. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
 
 The public repository is https://github.com/marsch124/AMS-NutritionCompanion. Use synthetic data during development. Personal Reminders and vault data are not used by this app.

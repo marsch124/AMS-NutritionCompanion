@@ -103,7 +103,49 @@ final class PantryStoreTests: XCTestCase {
         XCTAssertNil(defaults.data(forKey: "ams.pantry.state.v2"))
     }
 
-    private func sampleProduct() -> PantryProduct {
+    func testApprovedFlagAloneCannotAddFoodWithoutBothMemberApprovals() {
+        let suiteName = "ams.pantry.tests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let inconsistent = sampleProduct(approved: true)
+        let store = PantryStore(defaults: defaults, seedProducts: [inconsistent])
+
+        XCTAssertFalse(store.addToShoppingList(productID: inconsistent.id))
+        XCTAssertTrue(store.shoppingListEntries.isEmpty)
+    }
+
+    func testRemovingApprovalAlsoRemovesExistingShoppingEntry() {
+        let suiteName = "ams.pantry.tests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        var product = sampleProduct(approved: true, martinApproved: true, annaApproved: true)
+        let store = PantryStore(defaults: defaults, seedProducts: [product])
+        XCTAssertTrue(store.addToShoppingList(productID: product.id))
+
+        product.approved = false
+        product.martinApproved = false
+        product.annaApproved = false
+        store.update(product)
+
+        XCTAssertTrue(store.shoppingListEntries.isEmpty)
+    }
+
+    func testUnreadableSavedDataBlocksMutationsAndPreservesOriginalBytes() {
+        let suiteName = "ams.pantry.tests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let badData = Data("unreadable".utf8)
+        defaults.set(badData, forKey: "ams.pantry.state.v2")
+        let store = PantryStore(defaults: defaults, seedProducts: [sampleProduct()])
+
+        store.add(sampleProduct())
+        store.setApproval(sampleProduct(), householdMember: "Martin")
+        XCTAssertFalse(store.addToShoppingList(productID: "test-product"))
+        XCTAssertTrue(store.isReadOnly)
+        XCTAssertEqual(defaults.data(forKey: "ams.pantry.state.v2"), badData)
+    }
+
+    private func sampleProduct(approved: Bool = true, martinApproved: Bool = false, annaApproved: Bool = false) -> PantryProduct {
         PantryProduct(
             id: "test-product",
             name: "Test product",
@@ -113,7 +155,9 @@ final class PantryStoreTests: XCTestCase {
             ingredientsCriteria: "Whole food",
             selectionGuide: "Choose a fresh product",
             countries: ["SE"],
-            approved: true,
+            approved: approved,
+            martinApproved: martinApproved,
+            annaApproved: annaApproved,
             stores: [],
             minimumPrice: nil,
             maximumPrice: nil

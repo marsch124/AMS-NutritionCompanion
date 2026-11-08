@@ -94,6 +94,7 @@ struct PantryProduct: Codable, Identifiable, Hashable {
         approved = try values.decodeIfPresent(Bool.self, forKey: .approved) ?? false
         martinApproved = try values.decodeIfPresent(Bool.self, forKey: .martinApproved) ?? false
         annaApproved = try values.decodeIfPresent(Bool.self, forKey: .annaApproved) ?? false
+        approved = martinApproved && annaApproved
         stores = try values.decodeIfPresent([String].self, forKey: .stores) ?? []
         minimumPrice = try values.decodeIfPresent(Double.self, forKey: .minimumPrice)
         maximumPrice = try values.decodeIfPresent(Double.self, forKey: .maximumPrice)
@@ -178,6 +179,7 @@ final class PantryStore: ObservableObject {
     var visibleProducts: [PantryProduct] {
         products.filter(matchesCurrentFilters)
     }
+    var isReadOnly: Bool { !canPersist }
     var categories: [String] { Array(Set(visibleProducts.map(\.category))).sorted() }
     var visibleShoppingItems: [ListedPantryProduct] {
         shoppingListEntries.compactMap { entry in
@@ -187,21 +189,27 @@ final class PantryStore: ObservableObject {
     }
     var shoppingCategories: [String] { Array(Set(visibleShoppingItems.map(\.product.category))).sorted() }
     func product(_ id: String) -> PantryProduct? { products.first { $0.id == id } }
-    func update(_ value: PantryProduct) { if let i = products.firstIndex(where: { $0.id == value.id }) { products[i] = value } }
-    func add(_ value: PantryProduct) { products.insert(value, at: 0) }
+    func update(_ value: PantryProduct) {
+        guard canPersist, let i = products.firstIndex(where: { $0.id == value.id }) else { return }
+        products[i] = value
+        if !value.approved { shoppingListEntries.removeAll { $0.productID == value.id } }
+    }
+    func add(_ value: PantryProduct) { guard canPersist else { return }; products.insert(value, at: 0) }
     func shoppingListEntry(for productID: String) -> ShoppingListEntry? { shoppingListEntries.first { $0.productID == productID } }
     @discardableResult
     func addToShoppingList(productID: String, quantity: String = "1") -> Bool {
-        guard product(productID)?.approved == true, shoppingListEntry(for: productID) == nil else { return false }
+        guard let product = product(productID), product.approved, product.martinApproved, product.annaApproved,
+              canPersist, shoppingListEntry(for: productID) == nil else { return false }
         shoppingListEntries.append(ShoppingListEntry(id: UUID().uuidString, productID: productID, quantity: quantity, isChecked: false))
         return true
     }
-    func removeShoppingListItem(_ id: String) { shoppingListEntries.removeAll { $0.id == id } }
+    func removeShoppingListItem(_ id: String) { guard canPersist else { return }; shoppingListEntries.removeAll { $0.id == id } }
     func toggleShoppingListItem(_ id: String) {
-        guard let index = shoppingListEntries.firstIndex(where: { $0.id == id }) else { return }
+        guard canPersist, let index = shoppingListEntries.firstIndex(where: { $0.id == id }) else { return }
         shoppingListEntries[index].isChecked.toggle()
     }
     func setApproval(_ value: PantryProduct, householdMember: String) {
+        guard canPersist, householdMember == "Martin" || householdMember == "Anna" else { return }
         var p = value
         if householdMember == "Martin" { p.martinApproved = true } else { p.annaApproved = true }
         p.approved = p.martinApproved && p.annaApproved
@@ -238,7 +246,17 @@ final class PantryStore: ObservableObject {
 
 @main
 struct AMSNutritionCompanionApp: App {
-    @StateObject private var store = PantryStore()
+    @StateObject private var store: PantryStore
+
+    init() {
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("--ams-ui-testing") {
+            let suiteName = ProcessInfo.processInfo.environment["AMS_PANTRY_TEST_SUITE"] ?? "ams.ui-tests.\(UUID().uuidString)"
+            _store = StateObject(wrappedValue: PantryStore(defaults: UserDefaults(suiteName: suiteName) ?? UserDefaults()))
+        } else {
+            _store = StateObject(wrappedValue: PantryStore())
+        }
+    }
     var body: some Scene {
         WindowGroup {
             #if os(macOS)
@@ -310,7 +328,7 @@ struct PantryRootView: View {
     }
 
     @ToolbarContentBuilder private var toolbarItems: some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) { Button("Add item") { showingAdd = true }.accessibilityIdentifier("shopping.addItem") }
+        ToolbarItem(placement: .primaryAction) { Button("Add food") { showingAdd = true }.disabled(store.isReadOnly || selectedSection == "Label guide").accessibilityIdentifier("shopping.addItem") }
         #if os(iOS)
         ToolbarItem(placement: .automatic) {
             Menu("Browse") {
@@ -319,21 +337,25 @@ struct PantryRootView: View {
                 Button("Label guide") { selectSection("Label guide") }
             }.accessibilityIdentifier("navigation.browse")
         }
-        if sizeClass == .regular {
+        if sizeClass == .regular && selectedSection != "Label guide" {
             ToolbarItem(placement: .automatic) {
                 TextField("Search foods", text: $store.search).focused($searchFocused).frame(width: 220).accessibilityIdentifier("shopping.search")
             }
         }
         #else
+        if selectedSection != "Label guide" {
         ToolbarItem(placement: .automatic) {
             TextField("Search foods", text: $store.search).focused($searchFocused).frame(width: 220).accessibilityIdentifier("shopping.search")
         }
+        }
         #endif
+        if selectedSection != "Label guide" {
         ToolbarItem(placement: .automatic) {
             Menu {
                 Picker("Market", selection: $store.selectedMarket) { ForEach(["Sweden · SEK", "Germany · EUR"], id: \.self) { Text($0) } }
                 Picker("Store", selection: $store.selectedStore) { ForEach(retailerOptions, id: \.self) { Text($0) } }
-            } label: { Text("Market and store") }.accessibilityIdentifier("shopping.storeFilter")
+            } label: { Text(store.selectedStore == "All stores" ? store.selectedMarket : store.selectedStore) }.accessibilityIdentifier("shopping.storeFilter")
+        }
         }
         #if os(macOS)
         ToolbarItem(placement: .automatic) { Button("Label guide") { selectSection("Label guide") }.accessibilityIdentifier("navigation.labelGuide") }
@@ -359,13 +381,10 @@ struct PantryRootView: View {
     private var shoppingList: some View {
         VStack(spacing: 0) {
             #if os(iOS)
-            HStack {
+            if sizeClass != .regular { HStack {
                 TextField("Search foods", text: $store.search).textFieldStyle(.roundedBorder).focused($searchFocused).accessibilityIdentifier("shopping.search")
-            }.padding(.horizontal).padding(.vertical, 10)
+            }.padding(.horizontal).padding(.vertical, 10) }
             #endif
-            if let warning = store.persistenceWarning {
-                Text(warning).font(.callout).foregroundStyle(.red).frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
-            }
             List {
                 let listItems = store.visibleShoppingItems
                 if listItems.isEmpty {
@@ -407,9 +426,15 @@ struct PantryRootView: View {
         .navigationTitle("Product library")
     }
     @ViewBuilder private var sectionContent: some View {
-        if selectedSection == "Product library" { libraryList }
-        else if selectedSection == "Label guide" { LabelGuideView().accessibilityIdentifier("labelGuide.screen") }
-        else { shoppingList }
+        VStack(spacing: 0) {
+            if let warning = store.persistenceWarning {
+                Text(warning).font(.callout).foregroundStyle(.red).frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal).padding(.vertical, 8)
+                    .accessibilityIdentifier("storage.warning")
+            }
+            if selectedSection == "Product library" { libraryList }
+            else if selectedSection == "Label guide" { LabelGuideView().accessibilityIdentifier("labelGuide.screen") }
+            else { shoppingList }
+        }
     }
 
     private func selectSection(_ section: String) {
@@ -486,11 +511,11 @@ struct ProductDetailView: View {
                         detailSection("Ingredients and processing", p.ingredientsCriteria)
                         detailSection("Store and price", storeSummary(p))
                         HStack {
-                            Button("Edit details") { editing = true }.buttonStyle(.bordered)
-                            if !p.martinApproved { Button("Martin approves") { store.setApproval(p, householdMember: "Martin") }.buttonStyle(.bordered).accessibilityIdentifier("product.approve.martin") }
-                            if !p.annaApproved { Button("Anna approves") { store.setApproval(p, householdMember: "Anna") }.buttonStyle(.bordered).accessibilityIdentifier("product.approve.anna") }
+                            Button("Edit details") { editing = true }.buttonStyle(.bordered).disabled(store.isReadOnly)
+                            if !p.martinApproved { Button("Martin approves") { store.setApproval(p, householdMember: "Martin") }.buttonStyle(.bordered).disabled(store.isReadOnly).accessibilityIdentifier("product.approve.martin") }
+                            if !p.annaApproved { Button("Anna approves") { store.setApproval(p, householdMember: "Anna") }.buttonStyle(.bordered).disabled(store.isReadOnly).accessibilityIdentifier("product.approve.anna") }
                             if p.approved && store.shoppingListEntry(for: p.id) == nil {
-                                Button("Add to shopping list") { store.addToShoppingList(productID: p.id) }.buttonStyle(.borderedProminent).tint(PantryStyle.green).accessibilityIdentifier("product.addToList")
+                                Button("Add to shopping list") { store.addToShoppingList(productID: p.id) }.buttonStyle(.borderedProminent).tint(PantryStyle.green).disabled(store.isReadOnly).accessibilityIdentifier("product.addToList")
                             }
                         }
                     }.frame(maxWidth: 600, alignment: .leading).padding(24).frame(maxWidth: .infinity)
