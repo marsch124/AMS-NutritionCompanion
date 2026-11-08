@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class ShoppingScreenUITests: XCTestCase {
     func testShoppingScreenExposesStableListAddAndStoreFilterIdentifiers() {
         let app = XCUIApplication()
