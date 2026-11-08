@@ -26,8 +26,10 @@ final class ShoppingScreenUITests: XCTestCase {
         XCTAssertTrue(library.waitForExistence(timeout: 10))
         library.click()
 
-        let row = app.descendants(matching: .any)["library.row.green-lentils-dried"]
-        XCTAssertTrue(row.waitForExistence(timeout: 10))
+        let rowName = app.staticTexts["library.name.green-lentils-dried"]
+        XCTAssertTrue(rowName.waitForExistence(timeout: 10))
+        let row = app.outlineRows.containing(.staticText, identifier: rowName.identifier).firstMatch
+        XCTAssertTrue(row.exists)
         row.click()
         XCTAssertTrue(row.isSelected)
     }

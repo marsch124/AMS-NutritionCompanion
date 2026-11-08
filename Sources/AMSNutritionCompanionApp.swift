@@ -190,14 +190,23 @@ final class PantryStore: ObservableObject {
     }
     var shoppingCategories: [String] { Array(Set(visibleShoppingItems.map(\.product.category))).sorted() }
     func product(_ id: String) -> PantryProduct? { products.first { $0.id == id } }
-    func update(_ value: PantryProduct) {
-        guard canPersist, let i = products.firstIndex(where: { $0.id == value.id }) else { return }
+    @discardableResult
+    func update(_ value: PantryProduct) -> Bool {
+        guard canPersist, let i = products.firstIndex(where: { $0.id == value.id }) else { return false }
         var normalized = value
         normalized.approved = normalized.martinApproved && normalized.annaApproved
         products[i] = normalized
         if !normalized.approved { shoppingListEntries.removeAll { $0.productID == value.id } }
+        return canPersist
     }
-    func add(_ value: PantryProduct) { guard canPersist else { return }; products.insert(value, at: 0) }
+    @discardableResult
+    func add(_ value: PantryProduct) -> Bool {
+        guard canPersist else { return false }
+        var normalized = value
+        normalized.approved = normalized.martinApproved && normalized.annaApproved
+        products.insert(normalized, at: 0)
+        return canPersist
+    }
     func shoppingListEntry(for productID: String) -> ShoppingListEntry? { shoppingListEntries.first { $0.productID == productID } }
     @discardableResult
     func addToShoppingList(productID: String, quantity: String = "1") -> Bool {
@@ -228,7 +237,13 @@ final class PantryStore: ObservableObject {
     private func save() {
         guard canPersist else { return }
         let state = PersistedState(products: products, shoppingListEntries: shoppingListEntries)
-        if let data = try? JSONEncoder().encode(state) { defaults.set(data, forKey: persistenceKey) }
+        do {
+            let data = try JSONEncoder().encode(state)
+            defaults.set(data, forKey: persistenceKey)
+        } catch {
+            canPersist = false
+            persistenceWarning = "A change could not be saved. Editing is paused, and the last saved copy has been left untouched."
+        }
     }
     private static func migrateLegacyData(_ data: Data) -> PersistedState? {
         guard var legacyProducts = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else { return nil }
@@ -467,6 +482,7 @@ struct PantryRootView: View {
             }
             VStack(alignment: .leading, spacing: 3) {
                 Text(product.name).strikethrough(shoppingEntry?.isChecked == true).foregroundStyle(shoppingEntry?.isChecked == true ? .secondary : .primary)
+                    .accessibilityIdentifier("library.name.\(product.id)")
                 Text(product.approved ? "Household approved" : "Suggested · review together").font(.caption).foregroundStyle(.secondary)
             }
             Spacer(minLength: 8)
@@ -475,14 +491,16 @@ struct PantryRootView: View {
         }
         .contentShape(Rectangle()).onTapGesture { selection = product.id }
         .tag(product.id)
-        .accessibilityIdentifier("library.row.\(product.id)")
         #else
             NavigationLink(value: product.id) {
             HStack(spacing: 12) {
                 if let shoppingEntry {
                     Button { store.toggleShoppingListItem(shoppingEntry.id) } label: { PantryCheck(checked: shoppingEntry.isChecked) }.buttonStyle(.plain).accessibilityLabel("Toggle \(product.name)")
                 }
-                VStack(alignment: .leading, spacing: 3) { Text(product.name).strikethrough(shoppingEntry?.isChecked == true); Text(shoppingEntry?.quantity ?? (product.approved ? "Approved" : "Suggested · review together")).font(.caption).foregroundStyle(.secondary) }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(product.name).strikethrough(shoppingEntry?.isChecked == true).accessibilityIdentifier("library.name.\(product.id)")
+                    Text(shoppingEntry?.quantity ?? (product.approved ? "Approved" : "Suggested · review together")).font(.caption).foregroundStyle(.secondary)
+                }
             }
         }
         .swipeActions(edge: .trailing) {
@@ -492,7 +510,6 @@ struct PantryRootView: View {
                 Button("Add") { store.addToShoppingList(productID: product.id) }.tint(PantryStyle.green)
             }
         }
-        .accessibilityIdentifier("library.row.\(product.id)")
         #endif
     }
     private var currency: String { store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR" }
@@ -572,6 +589,7 @@ struct ProductEditorSheet: View {
     @State private var maximum = ""
     @State private var exactProduct = ""
     @State private var packageSize = ""
+    @State private var validationMessage: String?
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var photoData: Data?
     private let categories = ["Berries", "Fruit", "Vegetables", "Beans & lentils", "Nuts & seeds", "Grains", "Plant-based dairy", "Oils", "Other"]
@@ -589,6 +607,7 @@ struct ProductEditorSheet: View {
                 Section("Store and price guardrail") {
                     Picker("Store", selection: $storeChoice) { ForEach(store.selectedMarket.hasPrefix("Sweden") ? ["ICA", "Coop", "Willys", "Lidl", "Other"] : ["Aldi", "Edeka", "REWE", "Lidl", "Other"], id: \.self) { Text($0) } }
                     HStack { TextField("Minimum", text: $minimum); TextField("Maximum", text: $maximum) }
+                    if let validationMessage { Text(validationMessage).font(.footnote).foregroundStyle(.red).accessibilityIdentifier("product.edit.priceError") }
                     Text("Prices are entered and maintained by your household.").font(.footnote).foregroundStyle(.secondary)
                 }
                 Section("Package photo") {
@@ -616,12 +635,20 @@ struct ProductEditorSheet: View {
     }
     private func save() {
         let minVal = Double(minimum.replacingOccurrences(of: ",", with: ".")); let maxVal = Double(maximum.replacingOccurrences(of: ",", with: "."))
+        guard (minimum.isEmpty || minVal.map({ $0.isFinite && $0 >= 0 }) == true),
+              (maximum.isEmpty || maxVal.map({ $0.isFinite && $0 >= 0 }) == true),
+              minVal == nil || maxVal == nil || minVal! <= maxVal! else {
+            validationMessage = "Enter non-negative prices and make sure the minimum does not exceed the maximum."
+            return
+        }
+        validationMessage = nil
         if var p = product {
             p.name = name; p.category = category; p.suggestedProduct = exactProduct.isEmpty ? nil : exactProduct; p.packageSize = packageSize.isEmpty ? nil : packageSize; p.selectionGuide = tips; p.ingredientsCriteria = criteria; p.stores = [storeChoice]; p.minimumPrice = minVal; p.maximumPrice = maxVal; p.priceCurrency = store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR"; p.imageData = photoData
             p.approved = false; p.martinApproved = false; p.annaApproved = false
-            store.update(p)
+            guard store.update(p) else { return }
         } else {
-            store.add(PantryProduct(id: UUID().uuidString, name: name, category: category, suggestedProduct: exactProduct.isEmpty ? nil : exactProduct, packageSize: packageSize.isEmpty ? nil : packageSize, ingredientsCriteria: criteria, selectionGuide: tips, countries: [store.selectedMarket.hasPrefix("Sweden") ? "SE" : "DE"], approved: false, stores: [storeChoice], minimumPrice: minVal, maximumPrice: maxVal, priceCurrency: store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR", imageData: photoData))
+            let saved = store.add(PantryProduct(id: UUID().uuidString, name: name, category: category, suggestedProduct: exactProduct.isEmpty ? nil : exactProduct, packageSize: packageSize.isEmpty ? nil : packageSize, ingredientsCriteria: criteria, selectionGuide: tips, countries: [store.selectedMarket.hasPrefix("Sweden") ? "SE" : "DE"], approved: false, stores: [storeChoice], minimumPrice: minVal, maximumPrice: maxVal, priceCurrency: store.selectedMarket.hasPrefix("Sweden") ? "SEK" : "EUR", imageData: photoData))
+            guard saved else { return }
         }
         dismiss()
     }
