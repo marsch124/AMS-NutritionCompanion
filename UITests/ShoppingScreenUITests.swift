@@ -44,7 +44,7 @@ final class ShoppingScreenUITests: XCTestCase {
 
     func testChangingMarketResetsAnUnavailableStoreFilter() {
         let app = launchApp()
-        let filter = app.buttons["shopping.storeFilter"]
+        let filter = app.descendants(matching: .any)["shopping.storeFilter"]
         XCTAssertTrue(filter.waitForExistence(timeout: 10))
 
         filter.click()
