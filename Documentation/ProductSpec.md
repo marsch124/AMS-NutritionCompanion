@@ -1,6 +1,6 @@
 # Product specification
 
-**Status:** Version 0.1.0 development prototype, updated 8 November 2026. The last completed GitHub CI run passed the iOS build, three isolated data/persistence tests, and three Mac UI tests. Latest safety and store-rule changes await CI. The local test build is blocked by this machine's Xcode macro sandbox issue. iPhone/iPad runtime review, iCloud sync, complete screenshots, and publication remain outstanding. This document separates current behavior from the intended household product.
+**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub CI run 42508971145 passed the iOS build, six isolated persistence/store tests, one smoke test, and three Mac UI tests. The local test build is blocked by this machine's Xcode macro sandbox issue. iPhone/iPad runtime review, iCloud sync, complete screenshots, and publication remain outstanding. This document separates current behavior from the intended household product.
 
 ## Purpose
 
@@ -27,7 +27,7 @@ Help Martin shop accurately for the household with Anna. The intended app should
 - Product data, shopping-list entries, and selected package-photo bytes are saved together as one versioned state value in UserDefaults. On launch, legacy product-array data is migrated while preserving list quantity and bought status; stable migrated entry IDs avoid duplicate entries on retries, and the old saved value remains in place.
 - Unreadable saved data is left untouched, a warning is shown, and edits are blocked instead of silently loading seed data or discarding changes. Unit tests use a temporary UserDefaults suite; every UI test launches in its own named suite and cannot mutate normal app settings. Neither test kind accesses Reminders or a notes vault.
 
-The points above describe source and the last completed GitHub CI run on 8 November 2026. That run includes three data/persistence tests and three Mac UI tests. The latest uncommitted changes are not yet represented in CI. iOS/iPad simulator/device runtime behavior, full screen review, day/night screenshot set, and accessibility sign-off remain unconfirmed.
+The points above describe source and the completed GitHub CI run 42508971145 on 8 November 2026. That run includes six data/persistence tests, one smoke test, and three Mac UI tests. iOS/iPad simulator/device runtime behavior, full screen review, day/night screenshot set, and accessibility sign-off remain unconfirmed.
 
 ## Current prototype limits
 

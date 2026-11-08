@@ -30,6 +30,6 @@ Open the static English label guide to see Swedish and German terms for energy, 
 
 ## Verification and remaining work
 
-GitHub Actions passed the iOS target build, three isolated data/persistence tests, and three Mac UI tests on 8 November 2026 before the latest safety and store-rule changes. The current uncommitted changes add three unit regressions and isolate each UI-test launch. Mac UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, and opening the Label guide as an in-app destination. The local test build currently cannot start because this machine's sandbox blocks Xcode's SwiftUI macro service. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
+GitHub Actions passed the iOS target build, six isolated persistence/store tests plus one smoke test, and three Mac UI tests on 8 November 2026 (run 42508971145). The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, and opening the Label guide as an in-app destination. Each UI test starts with a unique data suite. A local test build could not start because this machine's sandbox blocks Xcode's SwiftUI macro service; CI provided the verification. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
 
 The public repository is https://github.com/marsch124/AMS-NutritionCompanion. Use synthetic data during development. Personal Reminders and vault data are not used by this app.
