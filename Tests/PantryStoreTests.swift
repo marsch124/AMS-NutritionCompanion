@@ -145,6 +145,26 @@ final class PantryStoreTests: XCTestCase {
         XCTAssertEqual(defaults.data(forKey: "ams.pantry.state.v2"), badData)
     }
 
+    func testRestoredUnapprovedListEntryIsHiddenAndCannotBeCheckedOff() throws {
+        let suiteName = "ams.pantry.tests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let product = sampleProduct(approved: false)
+        let entry = ShoppingListEntry(id: "old-entry", productID: product.id, quantity: "1", isChecked: false)
+        let productData = try JSONEncoder().encode([product])
+        let entryData = try JSONEncoder().encode([entry])
+        let saved = try JSONSerialization.data(withJSONObject: [
+            "products": try JSONSerialization.jsonObject(with: productData),
+            "shoppingListEntries": try JSONSerialization.jsonObject(with: entryData)
+        ])
+        defaults.set(saved, forKey: "ams.pantry.state.v2")
+        let store = PantryStore(defaults: defaults, seedProducts: [])
+
+        XCTAssertTrue(store.visibleShoppingItems.isEmpty)
+        store.toggleShoppingListItem(entry.id)
+        XCTAssertFalse(try XCTUnwrap(store.shoppingListEntries.first).isChecked)
+    }
+
     private func sampleProduct(approved: Bool = true, martinApproved: Bool = false, annaApproved: Bool = false) -> PantryProduct {
         PantryProduct(
             id: "test-product",
