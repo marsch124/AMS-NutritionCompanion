@@ -178,6 +178,7 @@ final class PantryStoreTests: XCTestCase {
 
         XCTAssertTrue(store.isReadOnly)
         XCTAssertNotNil(store.persistenceWarning)
+        XCTAssertNil(store.product(product.id)?.maximumPrice)
     }
 
     private func sampleProduct(approved: Bool = true, martinApproved: Bool = false, annaApproved: Bool = false) -> PantryProduct {
