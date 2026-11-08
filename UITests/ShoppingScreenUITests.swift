@@ -42,6 +42,21 @@ final class ShoppingScreenUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["shopping.storeFilter"].exists)
     }
 
+    func testChangingMarketResetsAnUnavailableStoreFilter() {
+        let app = launchApp()
+        let filter = app.buttons["shopping.storeFilter"]
+        XCTAssertTrue(filter.waitForExistence(timeout: 10))
+
+        filter.click()
+        app.menuItems["ICA"].click()
+        XCTAssertTrue(filter.label.contains("ICA"))
+
+        filter.click()
+        app.menuItems["Germany · EUR"].click()
+        XCTAssertTrue(filter.label.contains("Germany"))
+        XCTAssertTrue(filter.label.contains("All stores"))
+    }
+
     func testAProductNeedsBothHouseholdApprovalsBeforeItCanBeListed() {
         let app = launchApp()
 

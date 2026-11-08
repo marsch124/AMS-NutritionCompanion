@@ -1,6 +1,6 @@
 # How it works
 
-**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub CI passed the prior revision; the latest safety and approval changes await a fresh CI run. The Mac app has been built and launched locally. iPhone/iPad runtime review and household sync are still outstanding.
+**Status:** Version 0.1.0 development prototype, updated 8 November 2026. GitHub Actions run 42510781808 passed the iOS build, eight isolated store/persistence tests, one smoke test, and four Mac UI tests. iPhone/iPad runtime review, full screenshot review, and household sync are still outstanding.
 
 ## Product catalog and shopping list
 
@@ -18,7 +18,7 @@ If saved data cannot be read, the app shows a warning, leaves it untouched, and 
 
 ## Browse and shop
 
-Browse Shopping, Product library, and Label guide from the selectable sidebar on Mac and iPad. On iPhone, use the Browse menu. The Label guide is an in-app destination. Search and the single market/store selector are in the Mac toolbar; iPhone search stays above the list. The shopping list starts empty unless existing saved data is migrated. Choose Sweden/SEK or Germany/EUR and optionally ICA, Coop, Willys, Lidl, or Other. Proposed seed products have no store assignments, so filtering to one retailer can hide them until a store is added.
+Browse Shopping, Product library, and Label guide from the selectable sidebar on Mac and iPad. On iPhone, use the Browse menu. The Label guide is an in-app destination. Search and the single market/store selector are in the Mac toolbar; compact iPhone search currently appears above Shopping, while product-library search still needs to be added. Changing market can also leave a store selected that is not offered in the new country. The shopping list starts empty unless existing saved data is migrated. Choose Sweden/SEK or Germany/EUR and optionally ICA, Coop, Willys, Lidl, or Other. Proposed seed products have no store assignments, so filtering to one retailer can hide them until a store is added.
 
 Product details show category, approval state, selection guidance, ingredient/processing criteria, store, and numeric price limits if present. The editor accepts an exact brand/product, package size/unit, category, selection tips, ingredient/processing notes, one store, a minimum/maximum price, and a package photo selected from the photo library. Direct camera capture, branch detail, price observations/history, and separate per-market/store ranges are not implemented.
 
@@ -30,6 +30,6 @@ Open the static English label guide to see Swedish and German terms for energy, 
 
 ## Verification and remaining work
 
-GitHub Actions passed the iOS target build, six isolated persistence/store tests plus one smoke test, and three Mac UI tests on 8 November 2026 (run 42508971145). The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, and opening the Label guide as an in-app destination. Each UI test starts with a unique data suite. A local test build could not start because this machine's sandbox blocks Xcode's SwiftUI macro service; CI provided the verification. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
+GitHub Actions passed the iOS target build, eight isolated store/persistence tests plus one smoke test, and four Mac UI tests on 8 November 2026 (run 42510781808). The UI tests exercise stable accessibility identifiers, joint approval, adding an approved product to the list, opening the Label guide as an in-app destination, and native Mac row selection. Each UI test starts with a unique data suite. A local test build could not start because this machine's sandbox blocks Xcode's SwiftUI macro service; CI provided the verification. iOS/iPad runtime, full day/night screenshots, reviewer sign-off, iCloud sync, and release remain unverified.
 
 The public repository is https://github.com/marsch124/AMS-NutritionCompanion. Use synthetic data during development. Personal Reminders and vault data are not used by this app.

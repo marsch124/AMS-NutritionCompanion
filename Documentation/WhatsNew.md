@@ -13,7 +13,7 @@
 - Added isolated tests for approval enforcement, list lifecycle, legacy migration, and preserving unreadable saved data. Tests use their own temporary UserDefaults suite.
 - Changed the Mac/iPad sidebar to a native selectable list with a visible current section. The Label guide is now a normal in-app destination; iPhone navigation uses a Browse menu.
 - Moved Mac search into the toolbar and removed the duplicate market/store selector from the list pane.
-- GitHub Actions run 42508971145 passed the iOS build, six isolated persistence/store tests, one smoke test, and three Mac UI tests.
+- GitHub Actions run 42510781808 passed the iOS build, eight isolated persistence/store tests, one smoke test, and four Mac UI tests, including native Mac list-row selection.
 
 ## Existing prototype — Version 0.1.0
 
