@@ -37,6 +37,6 @@ The Mac target was built and launched locally in Xcode. iPhone/iPad builds and r
 
 ## Setup and release status
 
-Open AMSNutritionCompanion.xcodeproj in Xcode to inspect the declared targets and schemes. GitHub Actions configuration is in .github/workflows/ci.yml; no GitHub remote is connected. Configure the Apple Developer team and CloudKit container before implementing shared sync. Treat prototype data as disposable; use synthetic data and a separate test Apple account. Do not connect personal Reminders or a notes vault; they are outside this app’s scope.
+Open AMSNutritionCompanion.xcodeproj in Xcode to inspect the declared targets and schemes. The public GitHub repository is https://github.com/marsch124/AMS-NutritionCompanion and GitHub Actions configuration is in .github/workflows/ci.yml. Configure the Apple Developer team and CloudKit container before implementing shared sync. Treat prototype data as disposable; use synthetic data and a separate test Apple account. Do not connect personal Reminders or a notes vault; they are outside this app’s scope.
 
-No release has been published. Complete day/night screen captures, reviewer sign-off, iOS/iPad runtime checks, GitHub push/CI status, and publishing remain pending.
+No release has been published. Complete day/night screen captures, reviewer sign-off, iOS/iPad runtime checks, a passing GitHub Actions run, and publishing remain pending. The first public Actions run reached the iOS build and exposed a toolbar-builder compile error; the fix is being verified.

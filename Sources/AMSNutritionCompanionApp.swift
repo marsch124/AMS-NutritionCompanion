@@ -229,7 +229,7 @@ struct PantryRootView: View {
         #endif
     }
 
-    @ViewBuilder private var toolbarItems: some ToolbarContent {
+    @ToolbarContentBuilder private var toolbarItems: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) { Button("Add item") { showingAdd = true }.accessibilityIdentifier("shopping.addItem") }
         #if os(iOS)
         ToolbarItem(placement: .automatic) { Button(selectedSection == "Shopping" ? "Product library" : "Shopping") { selectedSection = selectedSection == "Shopping" ? "Product library" : "Shopping" } }
